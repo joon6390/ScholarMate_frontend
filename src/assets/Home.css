@@ -1,0 +1,163 @@
+/* 🟢 전체 페이지 스타일 */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ✅ 가로 스크롤 방지 */
+}
+
+.home-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: white;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden; /* ✅ 가로 넘침 방지 */
+}
+
+/* 🟢 헤더 스타일 */
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px; /* ✅ 여백 최적화 */
+    background: #ffffff; /* ✅ 배경색: 흰색 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 80px; /* ✅ 고정 높이 */
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ✅ 그림자 추가 */
+    box-sizing: border-box; /* ✅ padding 포함 */
+}
+
+/* 🟢 왼쪽: ScholarMate 로고 */
+.header-left {
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* ✅ 줄바꿈 방지 */
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.header-left h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: #222; /* ✅ 텍스트 색상 */
+}
+
+/* 🟢 가운데: 기능 버튼 */
+.nav {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap; /* ✅ 버튼이 넘치면 줄바꿈 */
+    max-width: 600px;
+}
+
+.nav-btn {
+    color: #222; /* ✅ 텍스트 색상 */
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: 0.3s;
+    white-space: nowrap; /* ✅ 줄바꿈 방지 */
+}
+
+.nav-btn:hover {
+    background: rgba(0, 0, 0, 0.1); /* ✅ 강조 효과 */
+}
+
+/* 🟢 오른쪽: 로그인 버튼 */
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.login-btn {
+    background: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+    cursor: pointer;
+    box-sizing: border-box; /* ✅ padding 포함 */
+}
+
+.login-btn:hover {
+    background: #e55b00; /* ✅ 강조 색상 */
+}
+
+/* 🟢 메인 컨텐츠 */
+.content {
+    margin-top: 100px; /* ✅ 헤더와 간격 유지 */
+    max-width: 800px;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 20px;
+    overflow-wrap: break-word;
+}
+
+/* 🟢 푸터 */
+.footer {
+    width: 100%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.05); /* ✅ 밝은 배경색 */
+    text-align: center;
+    font-size: 1.2rem;
+    position: absolute;
+    bottom: 0;
+}
+
+/* 🟢 반응형 디자인 */
+@media (max-width: 1024px) {
+    .header {
+        flex-direction: column;
+        height: auto; /* ✅ 높이 조정 */
+        padding: 10px;
+    }
+
+    .nav {
+        flex-wrap: wrap; /* ✅ 줄바꿈 활성화 */
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .header-right {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 5px;
+    }
+
+    .header-left h1 {
+        font-size: 1.5rem;
+    }
+
+    .nav-btn {
+        font-size: 1rem;
+        padding: 8px 12px;
+    }
+
+    .login-btn {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+}

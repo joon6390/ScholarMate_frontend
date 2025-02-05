@@ -1,0 +1,106 @@
+/* 🟢 전체 화면 크기에 맞게 설정 */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* 🟢 로그인 및 회원가입 카드 크기 조정 */
+.auth-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 450px;  /* 카드 너비 */
+    max-width: 90vw;  /* 작은 화면에서도 적절히 유지 */
+    text-align: center;
+    display: flex;
+    flex-direction: column;  /* 카드 내부 요소 수직 정렬 */
+    align-items: center;  /* 내부 요소 중앙 정렬 */
+}
+
+.auth-card input {
+    width: 100%;
+    height: 50px; /* 입력 필드와 버튼 높이 동일 */
+    padding: 12px; /* 내부 여백 */
+    margin: 12px 0; /* 필드 간 간격 */
+    border: 1px solid #ccc; /* 테두리 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    font-size: 1.1rem; /* 글꼴 크기 */
+    background-color: #f9f9f9; /* 배경색 */
+    color: #333; /* ✅ 글자 색상 추가 (보이도록 설정) */
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+/* 🟢 입력 필드에 입력 중일 때 스타일 */
+.auth-card input:focus {
+    border-color: #4facfe; /* 포커스 시 테두리 색상 */
+    outline: none; /* 기본 포커스 효과 제거 */
+    background-color: #fff; /* ✅ 포커스 시 배경색 변경 */
+    color: #000; /* ✅ 포커스 상태에서 글씨가 선명하게 보이도록 설정 */
+}
+
+/* 🟢 버튼 크기 조정 */
+.btn {
+    width: 100%;  /* 버튼이 카드 너비에 맞게 확장 */
+    height: 50px;  /* 입력 필드와 높이를 동일하게 설정 */
+    padding: 12px;
+    background: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;  /* 버튼과 입력 필드 사이 간격 */
+}
+
+.btn:hover {
+    background: #e55b00;
+}
+
+/* 🟢 링크 버튼 */
+.link-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 15px;  /* 링크와 버튼 사이 간격 */
+}
+
+/* 🟢 오류 메시지 */
+.error-message {
+    color: red;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+/* 🟢 반응형 디자인 (태블릿 & 모바일) */
+@media (max-width: 768px) {
+    .auth-card {
+        width: 90vw; /* 모바일에서 카드 크기 조정 */
+        padding: 30px;
+    }
+
+    .auth-card h2 {
+        font-size: 1.8rem; /* 제목 크기 조정 */
+    }
+
+    .auth-card input {
+        font-size: 1rem; /* 입력 필드 글꼴 크기 축소 */
+        padding: 10px;  /* 내부 여백 축소 */
+    }
+
+    .btn {
+        font-size: 1.2rem; /* 버튼 글꼴 크기 축소 */
+        padding: 10px;  /* 버튼 내부 여백 축소 */
+    }
+}
