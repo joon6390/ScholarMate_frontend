@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../assets/Auth.css";
+import "../assets/css/Auth.css";
 
 export default function Login({ onLogin }) {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -52,6 +52,14 @@ export default function Login({ onLogin }) {
             로그인
           </button>
         </form>
+        {/* 회원가입 버튼 추가 */}
+        <button
+          className="link-btn"
+          onClick={() => navigate("/register")}
+          style={{ marginTop: "20px" }} // 위치 조정
+        >
+          회원가입
+        </button>
       </div>
     </div>
   );

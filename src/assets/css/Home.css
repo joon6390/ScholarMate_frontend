@@ -1,0 +1,247 @@
+/* 전체 페이지 */
+html, body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+    font-family: "Poppins", Arial, sans-serif;
+    background: #f4f7f9; 
+    color: #333;
+}
+
+/* 컨테이너 */
+.home-container {
+    text-align: center;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden; /* 가로 넘침 방지 */
+}
+
+/* 헤더 */
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px; 
+    background: white;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 80px; /* 고정 높이 */
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+    box-sizing: border-box; 
+}
+
+/* 로고 및 제목 */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+.header-left h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: #2c3e50; /* 다크블루 */
+}
+
+/* 내비게이션 버튼 */
+.nav {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.nav-btn {
+    color: #2c3e50; 
+    text-decoration: none;
+    font-size: 1.rem;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: 0.3s;
+    white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.nav-btn:hover {
+    background: #3498db; /* 모던한 블루 강조 */
+    color: white;
+}
+
+/* 로그인 및 프로필 버튼 */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-btn {
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.login-btn:hover {
+    background: #3498db;
+    transform: scale(1.05);
+}
+
+/* 로그아웃 버튼 */
+.logout-btn {
+    background: transparent;
+    color: black;
+    border: none;
+    padding: 8px 18px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #3498db;
+    transform: scale(1.05);
+}
+
+.home-container .logout-btn:hover {
+    background: #3498db;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* 메인 컨텐츠 */
+.content {
+    margin-top: 100px; /* 헤더와 간격 유지 */
+    max-width: 800px;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 20px;
+    color: #2c3e50; 
+    line-height: 1.6; /* 가독성 향상 */
+}
+
+/* 푸터 */
+.footer {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    font-size: 1rem;
+    position: relative;
+    border-top: 1px solid #ddd; /* 부드러운 구분선 */
+    color: #333; 
+}
+
+/* 🟢 메인 배너 스타일 */
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f4f7f9; /* 부드러운 배경색 */
+    padding: 20px;
+    margin-top: 100px; /* 헤더와 간격 조정 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 가벼운 그림자 */
+    max-width: 1200px;
+    margin: 100px auto;
+}
+
+/* 배너 텍스트 */
+.banner-content {
+    max-width: 600px;
+    padding: 20px;
+    color: #333;
+    text-align: left;
+}
+
+.banner-content h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.banner-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* 배너 이미지 */
+.banner-image img {
+    max-width: 500px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+    .header {
+        flex-direction: column;
+        height: auto; /* 높이 조정 */
+        padding: 10px;
+    }
+
+    .nav {
+        flex-wrap: wrap; /* 줄바꿈 활성화 */
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .header-right {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 5px;
+    }
+
+    .header-left h1 {
+        font-size: 1.5rem;
+    }
+
+    .nav-btn {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+
+    .login-btn {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner {
+        flex-direction: column; /* 세로 배치 */
+        text-align: center;
+    }
+
+    .banner-content {
+        max-width: 100%;
+    }
+
+    .banner-image img {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+}
+

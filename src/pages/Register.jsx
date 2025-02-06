@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../assets/Auth.css";  // ✅ 변경된 경로
+import "../assets/css/Auth.css";  // ✅ 변경된 경로
 
 export default function Register() {
   const [form, setForm] = useState({ username: "", password: "" });

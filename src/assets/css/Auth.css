@@ -5,7 +5,7 @@
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(to right, #4facfe, #00f2fe);
+    background: #f4f7f9;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -51,7 +51,6 @@
     width: 100%;  /* 버튼이 카드 너비에 맞게 확장 */
     height: 50px;  /* 입력 필드와 높이를 동일하게 설정 */
     padding: 12px;
-    background: #ff6600;
     color: white;
     border: none;
     border-radius: 8px;
@@ -62,18 +61,27 @@
 }
 
 .btn:hover {
-    background: #e55b00;
+    background: #3498db; /* ✅ 모던한 블루 강조 */
+    color: white;
 }
 
 /* 🟢 링크 버튼 */
+/* 🟢 링크 버튼 스타일 */
 .link-btn {
-    background: none;
+    background-color: #ffffff; /* 흰색 배경 */
+    color: black; /* 검정 텍스트 */
+    padding: 10px 20px;
+    font-size: 1rem;
     border: none;
-    color: #007bff;
-    font-size: 1.2rem;
+    border-radius: 5px;
     cursor: pointer;
-    text-decoration: underline;
-    margin-top: 15px;  /* 링크와 버튼 사이 간격 */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none; /* 텍스트 밑줄 제거 */
+}
+
+.link-btn:hover {
+    background: #3498db; /* 블루 강조 */
+    color: white; /* 흰색 텍스트 */
 }
 
 /* 🟢 오류 메시지 */
@@ -104,3 +112,25 @@
         padding: 10px;  /* 버튼 내부 여백 축소 */
     }
 }
+
+.register-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .btn-secondary {
+    background-color: #ffffff;
+    color: black;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-secondary:hover {
+    background: #3498db; /* ✅ 모던한 블루 강조 */
+    color: white;
+  }
+  
