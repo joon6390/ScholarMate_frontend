@@ -126,13 +126,13 @@ html, body {
 
 /* 메인 컨텐츠 */
 .content {
-    margin-top: 100px; /* 헤더와 간격 유지 */
+    margin-top: 80px; /* 헤더와 간격 유지 */
     max-width: 800px;
-    font-size: 1.2rem;
-    text-align: center;
-    padding: 20px;
+    font-size: 1rem;
+    text-align: left;
+    padding: 10px;
     color: #2c3e50; 
-    line-height: 1.6; /* 가독성 향상 */
+    line-height: 2; /* 가독성 향상 */
 }
 
 /* 푸터 */
