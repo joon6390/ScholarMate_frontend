@@ -133,4 +133,35 @@
     background: #3498db; /* ✅ 모던한 블루 강조 */
     color: white;
   }
+
+  /* 박스 스타일링 */
+.date-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    white-space: nowrap;
+  }
+  
+  .date-label {
+    font-size: 16px;
+    margin-right: 10px;
+    color: #333;
+  }
+  
+  .date-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+    color: #333;
+  }
+  
+  .date-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
+  
   

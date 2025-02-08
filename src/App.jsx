@@ -5,6 +5,7 @@ import Scholarships from "./pages/Scholarships";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Myinfor from "./pages/Myinfor";
 import PrivateRoute from "./components/PrivateRoute"; // ✅ PrivateRoute 임포트
 import logo from "./assets/img/logo.png";  
 
@@ -97,7 +98,7 @@ export default function App() {
             path="/support"
             element={
               <PrivateRoute isLoggedIn={isLoggedIn}>
-                <div>마이페이지입니다.</div>
+                <Myinfor />
               </PrivateRoute>
             }
           />
