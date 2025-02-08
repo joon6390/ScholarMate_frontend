@@ -1,48 +1,75 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "../assets/css/Profile.css"; // 스타일 추가
+import "../assets/css/profile.css";
 
 export default function Profile() {
-  const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState(null);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    // 서버에서 사용자 정보 가져오기
-    const fetchProfile = async () => {
-      try {
-        const response = await axios.get("http://127.0.0.1:8000/auth/users/me/", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // 토큰 인증
-          },
-        });
-        setProfile(response.data); // 사용자 데이터 설정
-        setLoading(false); // 로딩 완료
-      } catch (err) {
-        if (err.response && err.response.status === 401) {
-          setError("인증에 실패했습니다. 다시 로그인해주세요.");
-        } else {
-          setError("프로필 정보를 가져오는데 실패했습니다.");
-        }
-        setLoading(false);
-      }
-    };
+  // Axios 인스턴스 생성
+  const api = axios.create({
+    baseURL: "http://127.0.0.1:8000",
+    headers: {
+      Authorization: `JWT ${localStorage.getItem("token")}`,
+    },
+  });
 
-    fetchProfile(); // 컴포넌트 로드 시 사용자 정보 요청
+  // 토큰 갱신 함수
+  const refreshAccessToken = async () => {
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/auth/jwt/refresh/", {
+        refresh: localStorage.getItem("refreshToken"),
+      });
+      localStorage.setItem("token", response.data.access);
+      api.defaults.headers.Authorization = `JWT ${response.data.access}`;
+    } catch (err) {
+      console.error("토큰 갱신 실패:", err);
+      setError("로그인이 필요합니다.");
+    }
+  };
+
+  // 사용자 데이터 가져오기
+  const fetchUserData = async () => {
+    try {
+      const response = await api.get("/auth/users/me/");
+      setUserData(response.data);
+    } catch (err) {
+      if (err.response?.status === 401) {
+        await refreshAccessToken();
+        fetchUserData(); // 재시도
+      } else {
+        console.error("사용자 정보를 불러오지 못했습니다:", err);
+        setError("사용자 정보를 불러오지 못했습니다.");
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
   }, []);
 
-  if (loading) return <p>로딩 중...</p>;
-  if (error) return <p className="error-message">{error}</p>;
+  if (error) {
+    return <div className="error">{error}</div>;
+  }
+
+  if (!userData) {
+    return <p>사용자 정보를 불러오는 중...</p>;
+  }
 
   return (
     <div className="profile-container">
-      <h2>내 프로필</h2>
+      <div className="profile-header">
+        <div>
+          <h2>{userData.username}님의 프로필</h2>
+        </div>
+        <div className="profile-actions">
+        </div>
+      </div>
+
       <div className="profile-card">
-        <p><strong>아이디:</strong> {profile.username}</p>
-        <p><strong>이름:</strong> {profile.first_name} {profile.last_name}</p>
-        <p><strong>닉네임:</strong> {profile.nickname}</p>
-        <p><strong>생년월일:</strong> {profile.birth_date}</p>
-        <p><strong>이메일:</strong> {profile.email}</p>
+        <h3>회원가입 정보</h3>
+        <p><strong>아이디:</strong> {userData.username}</p>
+        <p><strong>이메일:</strong> {userData.email}</p>
       </div>
     </div>
   );

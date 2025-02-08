@@ -17,12 +17,12 @@
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    width: 450px;  /* 카드 너비 */
-    max-width: 90vw;  /* 작은 화면에서도 적절히 유지 */
+    width: 450px; /* 카드 너비 */
+    max-width: 90vw; /* 작은 화면에서도 적절히 유지 */
     text-align: center;
     display: flex;
-    flex-direction: column;  /* 카드 내부 요소 수직 정렬 */
-    align-items: center;  /* 내부 요소 중앙 정렬 */
+    flex-direction: column; /* 카드 내부 요소 수직 정렬 */
+    align-items: center; /* 내부 요소 중앙 정렬 */
 }
 
 .auth-card input {
@@ -34,7 +34,7 @@
     border-radius: 8px; /* 모서리 둥글게 */
     font-size: 1.1rem; /* 글꼴 크기 */
     background-color: #f9f9f9; /* 배경색 */
-    color: #333; /* ✅ 글자 색상 추가 (보이도록 설정) */
+    color: #333; /* ✅ 글자 색상 추가 */
     box-sizing: border-box; /* 패딩 포함 크기 계산 */
 }
 
@@ -48,8 +48,8 @@
 
 /* 🟢 버튼 크기 조정 */
 .btn {
-    width: 100%;  /* 버튼이 카드 너비에 맞게 확장 */
-    height: 50px;  /* 입력 필드와 높이를 동일하게 설정 */
+    width: 100%; /* 버튼이 카드 너비에 맞게 확장 */
+    height: 50px; /* 입력 필드와 높이를 동일하게 설정 */
     padding: 12px;
     color: white;
     border: none;
@@ -57,7 +57,7 @@
     font-size: 1.3rem;
     cursor: pointer;
     transition: 0.3s;
-    margin-top: 20px;  /* 버튼과 입력 필드 사이 간격 */
+    margin-top: 20px; /* 버튼과 입력 필드 사이 간격 */
 }
 
 .btn:hover {
@@ -66,7 +66,6 @@
 }
 
 /* 🟢 링크 버튼 */
-/* 🟢 링크 버튼 스타일 */
 .link-btn {
     background-color: #ffffff; /* 흰색 배경 */
     color: black; /* 검정 텍스트 */
@@ -95,7 +94,7 @@
 @media (max-width: 768px) {
     .auth-card {
         width: 90vw; /* 모바일에서 카드 크기 조정 */
-        padding: 30px;
+        padding: 30px; /* 카드 내부 패딩 조정 */
     }
 
     .auth-card h2 {
@@ -104,37 +103,46 @@
 
     .auth-card input {
         font-size: 1rem; /* 입력 필드 글꼴 크기 축소 */
-        padding: 10px;  /* 내부 여백 축소 */
+        padding: 10px; /* 내부 여백 축소 */
     }
 
     .btn {
         font-size: 1.2rem; /* 버튼 글꼴 크기 축소 */
-        padding: 10px;  /* 버튼 내부 여백 축소 */
+        padding: 10px; /* 버튼 내부 여백 축소 */
     }
 }
 
-.register-container {
-    margin-top: 20px;
-    text-align: center;
-  }
-  
-  .btn-secondary {
-    background-color: #ffffff;
-    color: black;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-secondary:hover {
-    background: #3498db; /* ✅ 모던한 블루 강조 */
-    color: white;
-  }
+/* 🟢 모바일 (480px 이하) */
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 10px; /* 전체 화면 여백 추가 */
+    }
 
-  /* 박스 스타일링 */
+    .auth-card {
+        padding: 20px; /* 카드 내부 패딩 추가 */
+    }
+
+    .auth-card h2 {
+        font-size: 1.5rem; /* 제목 크기 축소 */
+    }
+
+    .auth-card input {
+        font-size: 0.9rem; /* 입력 필드 글꼴 크기 축소 */
+        padding: 8px; /* 내부 여백 축소 */
+    }
+
+    .btn {
+        font-size: 1rem; /* 버튼 글꼴 크기 축소 */
+        padding: 8px; /* 버튼 내부 여백 축소 */
+    }
+
+    .link-btn {
+        font-size: 0.9rem; /* 링크 버튼 글꼴 크기 축소 */
+        padding: 8px 15px;
+    }
+}
+
+/* 박스 스타일링 */
 .date-box {
     display: flex;
     align-items: center;
@@ -143,25 +151,23 @@
     padding: 10px;
     background-color: #f9f9f9;
     white-space: nowrap;
-  }
-  
-  .date-label {
+}
+
+.date-label {
     font-size: 16px;
     margin-right: 10px;
     color: #333;
-  }
-  
-  .date-input {
+}
+
+.date-input {
     border: none;
     background: transparent;
     outline: none;
     font-size: 16px;
     width: 100%;
     color: #333;
-  }
-  
-  .date-input::-webkit-calendar-picker-indicator {
+}
+
+.date-input::-webkit-calendar-picker-indicator {
     cursor: pointer;
-  }
-  
-  
+}

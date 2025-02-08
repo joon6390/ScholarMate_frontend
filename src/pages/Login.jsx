@@ -23,6 +23,7 @@ export default function Login({ onLogin }) {
       );
       // JWT 토큰 저장
       localStorage.setItem("token", response.data.access);
+      localStorage.setItem("refreshToken", response.data.refresh);
 
       // 로그인 상태 업데이트 (부모 컴포넌트에 알림)
       onLogin();
@@ -38,10 +39,8 @@ export default function Login({ onLogin }) {
     <div className="auth-container">
       <div className="auth-card">
         <h2>로그인</h2>
-        {/* 에러 메시지 표시 */}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <form onSubmit={handleSubmit}>
-          {/* 아이디 입력 */}
           <input
             type="text"
             name="username"
@@ -50,7 +49,6 @@ export default function Login({ onLogin }) {
             onChange={handleChange}
             required
           />
-          {/* 비밀번호 입력 */}
           <input
             type="password"
             name="password"
@@ -59,16 +57,12 @@ export default function Login({ onLogin }) {
             onChange={handleChange}
             required
           />
-          {/* 로그인 버튼 */}
-          <button type="submit" className="btn">
-            로그인
-          </button>
+          <button type="submit" className="btn">로그인</button>
         </form>
-        {/* 회원가입 버튼 */}
         <button
           className="link-btn"
           onClick={() => navigate("/register")}
-          style={{ marginTop: "20px" }} // 위치 조정
+          style={{ marginTop: "20px" }}
         >
           회원가입
         </button>

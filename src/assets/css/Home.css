@@ -67,7 +67,7 @@ html, body {
 .nav-btn {
     color: #2c3e50; 
     text-decoration: none;
-    font-size: 1.rem;
+    font-size: 1rem;
     padding: 8px 15px;
     border-radius: 5px;
     transition: 0.3s;
@@ -190,7 +190,9 @@ html, body {
 }
 
 /* 반응형 디자인 */
-@media (max-width: 1024px) {
+
+/* 태블릿 (768px 이하) */
+@media (max-width: 768px) {
     .header {
         flex-direction: column;
         height: auto; /* 높이 조정 */
@@ -207,11 +209,28 @@ html, body {
     .header-right {
         margin-top: 10px;
     }
+
+    .banner {
+        flex-direction: column; /* 세로 배치 */
+        text-align: center;
+    }
+
+    .banner-content {
+        max-width: 100%;
+    }
+
+    .banner-image img {
+        max-width: 100%;
+        margin-top: 20px;
+    }
 }
 
-@media (max-width: 768px) {
-    .header {
-        padding: 5px;
+/* 모바일 (480px 이하) */
+@media (max-width: 480px) {
+    .banner {
+        padding: 10px;
+        flex-direction: column; /* 세로 배치 */
+        text-align: center;
     }
 
     .header-left h1 {
@@ -228,20 +247,3 @@ html, body {
         padding: 8px 15px;
     }
 }
-
-@media (max-width: 768px) {
-    .banner {
-        flex-direction: column; /* 세로 배치 */
-        text-align: center;
-    }
-
-    .banner-content {
-        max-width: 100%;
-    }
-
-    .banner-image img {
-        max-width: 100%;
-        margin-top: 20px;
-    }
-}
-
