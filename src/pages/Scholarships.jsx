@@ -88,10 +88,12 @@ export default function Scholarships() {
           onChange={(e) => setSelectedType(e.target.value)}
           className="filter-dropdown"
         >
-          <option value="">모든 유형</option>
-          <option value="undergraduate">학부</option>
-          <option value="graduate">대학원</option>
-          <option value="international">해외</option>
+           <option value="">모든 유형</option>
+          <option value="undergraduate">지역 연고</option>
+          <option value="graduate">성적 우수</option>
+          <option value="international">소득 구분</option>
+          <option value="international">특기자</option>
+          <option value="international">기타</option>
         </select>
 
         {/* 장학금 정렬 */}
@@ -102,7 +104,6 @@ export default function Scholarships() {
         >
           <option value="">정렬 없음</option>
           <option value="end_date">모집 종료일 순</option>
-          <option value="name">장학금 이름 순</option>
         </select>
       </div>
 

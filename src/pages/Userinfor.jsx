@@ -1,0 +1,256 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../assets/css/userinfor.css";
+import regions from "../data/regions";  
+import majorFields from "../data/majorFields";  
+import universities from "../data/universities";
+import universitiesWithDepartments from "../data/universities_with_departments";
+
+const incomeLevels = Array.from({ length: 10 }, (_, i) => `${i + 1}분위`);
+const academicYears = ["1학년", "2학년", "3학년", "4학년", "5학년 이상"]; // 학년 옵션
+const semesters = ["신입생", "1학기", "2학기", "3학기", "4학기", "5학기", "6학기", "7학기", "8학기 이상"]; // ✅ 수료 학기 옵션 추가
+
+const Userinfor = () => {
+  const navigate = useNavigate();
+  const [selectedRegion, setSelectedRegion] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedIncomeLevel, setSelectedIncomeLevel] = useState("");
+  const [selectedMajorField, setSelectedMajorField] = useState("");
+  const [selectedUniversity, setSelectedUniversity] = useState(""); // ✅ 선택된 대학교
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // ✅ 모달 창 상태
+  const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태
+  const [filteredUniversities, setFilteredUniversities] = useState(universities); 
+  const [departments, setDepartments] = useState([]); // ✅ 선택된 대학교의 학과 목록
+  const [selectedAcademicYear, setSelectedAcademicYear] = useState(""); // ✅ 학년 선택 상태
+  const [selectedSemester, setSelectedSemester] = useState(""); // ✅ 수료 학기 상태 추가
+
+  // ✅ 검색어 입력 시 universities.js에서 필터링
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    if (query.length > 0) {
+      setFilteredUniversities(
+        universities.filter((uni) =>
+          uni.toLowerCase().includes(query.toLowerCase())
+        )
+      );
+    } else {
+      setFilteredUniversities(universities);
+    }
+  };
+
+  // ✅ 대학 선택 시 학과 목록 업데이트
+  const handleSelectUniversity = (university) => {
+    setSelectedUniversity(university);
+    setIsModalOpen(false);
+    setSearchQuery(""); // 검색어 초기화
+
+    // ✅ 선택된 대학교의 학과 리스트 불러오기
+    if (universitiesWithDepartments[university]) {
+      setDepartments(universitiesWithDepartments[university]);
+    } else {
+      setDepartments([]); // 학과 정보가 없을 경우 빈 배열 유지
+    }
+  };
+
+  const handleSave = () => {
+    alert(`장학 정보가 저장되었습니다.`);
+  };
+
+  return (
+    <div className="container">
+      <div className="profile-box">
+        <h2 className="title">장학 정보 입력</h2>
+
+        <div className="form-row">
+          <label className="form-label">이름</label>
+          <input type="text" className="form-input" placeholder="박장학" />
+        </div>
+
+        <div className="form-row">
+          <label className="form-label">생년월일</label>
+          <input type="date" className="form-input" min="1900-01-01" max="2100-12-31" />
+        </div>
+
+        <div className="form-row">
+          <label className="form-label">이메일</label>
+          <input type="email" className="form-input" placeholder="example@domain.com" />
+        </div>
+
+        <div className="form-row">
+          <label className="form-label">닉네임</label>
+          <input type="text" className="form-input" placeholder="나의꿈은졸업" />
+        </div>
+
+        <div className="form-row">
+          <label className="form-label">거주 지역</label>
+          <div className="form-group">
+            <select className="form-select" value={selectedRegion} onChange={(e) => { setSelectedRegion(e.target.value); setSelectedDistrict(""); }}>
+              <option value="">지역 선택</option>
+              {Object.keys(regions).map((region) => (
+                <option key={region} value={region}>{region}</option>
+              ))}
+            </select>
+            <select className="form-select" value={selectedDistrict} onChange={(e) => setSelectedDistrict(e.target.value)} disabled={!selectedRegion}>
+              <option value="">군/구 선택</option>
+              {selectedRegion && regions[selectedRegion].map((district) => (
+                <option key={district} value={district}>{district}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <label className="form-label">소득 분위</label>
+          <select 
+            className="form-select"
+            value={selectedIncomeLevel}
+            onChange={(e) => setSelectedIncomeLevel(e.target.value)}
+          >
+            <option value="">분위 선택</option>
+            {incomeLevels.map((level) => (
+              <option key={level} value={level}>{level}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-row">
+          <label className="form-label">지원 계열</label>
+          <select 
+            className="form-select"
+            value={selectedMajorField}
+            onChange={(e) => setSelectedMajorField(e.target.value)}
+          >
+            <option value="">계열 선택</option>
+            {majorFields.map((field) => (
+              <option key={field} value={field}>{field}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-row">
+          <label className="form-label">학교</label>
+          <div className="form-group">
+            <input 
+              type="text" 
+              className="form-input"
+               placeholder="대학교 선택" 
+               value={selectedUniversity}
+               readOnly
+            />
+            <button className="form-button" onClick={() => setIsModalOpen(true)}>
+              검색
+            </button>
+          </div>
+        </div>
+
+         {/* ✅ 대학교 검색 모달 창 */}
+         {isModalOpen && (
+          <div className="modal-overlay">
+            <div className="modal">
+              <h3>대학교 검색</h3>
+              <button className="close-btn" onClick={() => setIsModalOpen(false)}>
+                닫기
+              </button>
+
+              <input
+                type="text"
+                className="search-input"
+                placeholder="대학교 검색"
+                value={searchQuery}
+                onChange={handleSearch}
+              />
+              <button className="close-btn" onClick={() => setIsModalOpen(false)}>
+                닫기
+              </button>
+              <ul className="dropdown-list">
+                {filteredUniversities.length > 0 ? (
+                  filteredUniversities.map((uni) => (
+                    <li key={uni} onClick={() => handleSelectUniversity(uni)}>
+                      {uni}
+                    </li>
+                  ))
+                ) : (
+                  <li>검색 결과 없음</li>
+                )}
+              </ul>
+            </div>
+          </div>
+        )}
+
+        <div className="form-row">
+          <label className="form-label">학과/학년</label>
+          <div className="form-group">
+            <select 
+              className="form-select"
+              value={selectedDepartment}
+              onChange={(e) => setSelectedDepartment(e.target.value)}
+              disabled={!departments.length} // 학과가 없으면 비활성화
+            >
+              <option value="">학과 선택</option>
+              {departments.map((dept, index) => (
+                <option key={index} value={dept}>{dept}</option>
+              ))}
+            </select>
+
+            <select className="form-select"
+            value={selectedAcademicYear}
+            onChange={(e) => selectedAcademicYear(e.target.value)}
+            >
+              <option value="">학년 선택</option>
+              {academicYears.map((year, index) => (
+                <option key={index} value={year}>{year}</option>
+              ))}
+              </select>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <label className="form-label">수료 학기</label>
+          <select 
+            className="form-select"
+            value={selectedSemester}
+            onChange={(e) => setSelectedSemester(e.target.value)}
+          >
+            <option>학기 선택</option>
+            {semesters.map((semester, index) => (
+              <option key={index} value={semester}>
+                {semester}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-row">
+          <label className="form-label">성적</label>
+          <div className="form-group">
+            <input type="number" className="form-input" step="0.01" placeholder="직전 학기 성적" />
+            <input type="number" className="form-input" step="0.01" placeholder="전체 성적" />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <label className="form-label">기타</label>
+          <div className="checkbox-group">
+            <label><input type="checkbox" /> 다문화 가정</label>
+            <label><input type="checkbox" /> 한부모 가정</label>
+            <label><input type="checkbox" /> 다자녀 가정</label>
+            <label><input type="checkbox" /> 국가유공자</label>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <label className="form-label">추가 정보</label>
+          <textarea className="form-textarea" placeholder="예시) 프랜차이즈 카페에서 주 7시간 근무 중. 소득 분위 관련 장학금을 찾고 있음." />
+        </div>
+
+        <div className="form-row">
+          <button className="save-btn" onClick={handleSave}>저장하기</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Userinfor;
