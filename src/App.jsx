@@ -6,7 +6,7 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Myinfor from "./pages/Userinfor";
-import PrivateRoute from "./components/PrivateRoute"; // ✅ PrivateRoute 임포트
+import PrivateRoute from "./components/PrivateRoute"; // 
 import logo from "./assets/img/logo.png";  
 
 export default function App() {
@@ -44,13 +44,13 @@ export default function App() {
           <Link to="/scholarships" className="nav-btn">전체 장학금</Link>
           <Link to="/recommendations" className="nav-btn">추천 장학금</Link>
           <Link to="/community" className="nav-btn">관심 장학금</Link>
-          <Link to="/calendar" className="nav-btn">캘린더</Link>
-          <Link to="/support" className="nav-btn">마이페이지</Link>
+          <Link to="/calendar" className="nav-btn">개인 장학 캘린더</Link>
+          <Link to="/support" className="nav-btn">개인 장학 정보</Link>
         </nav>
         <div className="header-right">
           {isLoggedIn ? (
             <>
-              <button className="login-btn" onClick={() => navigate("/profile")}>내 프로필</button>
+              <button className="login-btn" onClick={() => navigate("/profile")}>마이페이지</button>
               <button className="logout-btn" onClick={handleLogout}>로그아웃</button>
             </>
           ) : (

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../assets/css/Auth.css"; // 스타일 추가
+import "../assets/css/Auth.css"; 
 
 export default function Register() {
   const [form, setForm] = useState({

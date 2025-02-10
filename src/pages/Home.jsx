@@ -1,5 +1,5 @@
-import "../assets/css/Home.css"; // CSS 파일 연결
-import bannerImage from "../assets/img/banner.png"; // 배너 이미지 경로
+import "../assets/css/Home.css"; 
+import bannerImage from "../assets/img/banner.png"; 
 
 export default function Home() {
   return (

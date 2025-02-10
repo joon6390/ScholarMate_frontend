@@ -60,7 +60,7 @@ export default function Profile() {
     <div className="profile-container">
       <div className="profile-header">
         <div>
-          <h2>{userData.username}님의 프로필</h2>
+          <h2>{userData.username}님의 마이페이지</h2>
         </div>
         <div className="profile-actions">
         </div>

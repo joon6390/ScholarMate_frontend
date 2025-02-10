@@ -7,8 +7,10 @@ import universities from "../data/universities";
 import universitiesWithDepartments from "../data/universities_with_departments";
 
 const incomeLevels = Array.from({ length: 10 }, (_, i) => `${i + 1}분위`);
-const academicYears = ["1학년", "2학년", "3학년", "4학년", "5학년 이상"]; // 학년 옵션
-const semesters = ["신입생", "1학기", "2학기", "3학기", "4학기", "5학기", "6학기", "7학기", "8학기 이상"]; // ✅ 수료 학기 옵션 추가
+const academicYears = ["1학년", "2학년", "3학년", "4학년", "5학년 이상"]; 
+const semesters = ["신입생", "1학기", "2학기", "3학기", "4학기", "5학기", "6학기", "7학기", "8학기 이상"]; 
+const genders = ["남성", "여성", "선택안함"];
+const univCategories = ["4년제(5-6년제포함)", "전문대(2-3년제)", "해외대학"];
 
 const Userinfor = () => {
   const navigate = useNavigate();
@@ -16,16 +18,18 @@ const Userinfor = () => {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedIncomeLevel, setSelectedIncomeLevel] = useState("");
   const [selectedMajorField, setSelectedMajorField] = useState("");
-  const [selectedUniversity, setSelectedUniversity] = useState(""); // ✅ 선택된 대학교
+  const [selectedUniversity, setSelectedUniversity] = useState(""); 
   const [selectedDepartment, setSelectedDepartment] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // ✅ 모달 창 상태
-  const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [searchQuery, setSearchQuery] = useState(""); 
   const [filteredUniversities, setFilteredUniversities] = useState(universities); 
-  const [departments, setDepartments] = useState([]); // ✅ 선택된 대학교의 학과 목록
-  const [selectedAcademicYear, setSelectedAcademicYear] = useState(""); // ✅ 학년 선택 상태
-  const [selectedSemester, setSelectedSemester] = useState(""); // ✅ 수료 학기 상태 추가
+  const [departments, setDepartments] = useState([]); 
+  const [selectedAcademicYear, setSelectedAcademicYear] = useState(""); 
+  const [selectedSemester, setSelectedSemester] = useState(""); 
+  const [selectedGender, setSelectedGender] = useState(""); 
+  const [selectedUnivCategory, setSelectedUnivCategory] = useState(""); 
 
-  // ✅ 검색어 입력 시 universities.js에서 필터링
+  // 검색어 입력 시 universities.js에서 필터링
   const handleSearch = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
@@ -40,13 +44,13 @@ const Userinfor = () => {
     }
   };
 
-  // ✅ 대학 선택 시 학과 목록 업데이트
+  // 대학 선택 시 학과 목록 업데이트
   const handleSelectUniversity = (university) => {
     setSelectedUniversity(university);
     setIsModalOpen(false);
     setSearchQuery(""); // 검색어 초기화
 
-    // ✅ 선택된 대학교의 학과 리스트 불러오기
+    // 선택된 대학교의 학과 리스트 불러오기
     if (universitiesWithDepartments[university]) {
       setDepartments(universitiesWithDepartments[university]);
     } else {
@@ -69,18 +73,24 @@ const Userinfor = () => {
         </div>
 
         <div className="form-row">
+          <label className="form-label">성별</label>
+          <select
+            className="form-select"
+            value={selectedGender}
+            onChange={(e) => setSelectedGender(e.target.value)}
+          >
+            <option value="">성별 선택</option>
+            {genders.map((gender, index) => (
+              <option key={index} value={gender}>
+                {gender}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-row">
           <label className="form-label">생년월일</label>
           <input type="date" className="form-input" min="1900-01-01" max="2100-12-31" />
-        </div>
-
-        <div className="form-row">
-          <label className="form-label">이메일</label>
-          <input type="email" className="form-input" placeholder="example@domain.com" />
-        </div>
-
-        <div className="form-row">
-          <label className="form-label">닉네임</label>
-          <input type="text" className="form-input" placeholder="나의꿈은졸업" />
         </div>
 
         <div className="form-row">
@@ -115,6 +125,22 @@ const Userinfor = () => {
           </select>
         </div>
 
+         <div className="form-row">
+          <label className="form-label">대학 유형</label>
+          <select
+            className="form-select"
+            value={selectedUnivCategory}
+            onChange={(e) => setSelectedUnivCategory(e.target.value)}
+          >
+            <option value="">대학 유형 선택</option>
+            {univCategories.map((category, index) => (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <div className="form-row">
           <label className="form-label">지원 계열</label>
           <select 
@@ -145,7 +171,7 @@ const Userinfor = () => {
           </div>
         </div>
 
-         {/* ✅ 대학교 검색 모달 창 */}
+         {/* 대학교 검색 모달 창 */}
          {isModalOpen && (
           <div className="modal-overlay">
             <div className="modal">
