@@ -6,29 +6,43 @@ export default function Scholarships() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(10);
+  const [perPage] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedType, setSelectedType] = useState(""); // 장학금 유형
-  const [sortOrder, setSortOrder] = useState(""); // 정렬 기준
-  const [favorites, setFavorites] = useState(new Set()); // 찜 목록 (Set 사용)
+  const [selectedType, setSelectedType] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
+  const [favorites, setFavorites] = useState(new Set());
 
+  // ✅ Django 백엔드에서 사용하는 학자금 유형과 매핑
+  const scholarshipTypeMapping = {
+    regional: "지역연고",
+    academic: "성적우수",
+    income_based: "소득구분",
+    special_talent: "특기자",
+    other: "기타",
+  };
+
+  // ✅ API URL을 생성하는 함수
+  const buildApiUrl = () => {
+    const typeParam = scholarshipTypeMapping[selectedType] || "";
+    return `http://localhost:8000/scholarships/api/scholarships/?page=${page}&perPage=${perPage}&search=${searchQuery}&type=${typeParam}&sort=${sortOrder}`;
+  };
+
+  // ✅ API 요청 함수
   const fetchScholarships = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch(
-        `http://localhost:8000/scholarships/api/scholarships/?page=${page}&perPage=${perPage}&search=${searchQuery}&type=${selectedType}&sort=${sortOrder}`
-      );
+      const response = await fetch(buildApiUrl());
       const result = await response.json();
 
       if (result) {
-        // 각 데이터에 고유 ID 생성 (상품명 + 운영기관명 조합)
         const dataWithIds = result.data.map((item) => ({
           ...item,
           id: `${item["상품명"]}_${item["운영기관명"]}`,
         }));
+
         setScholarships(dataWithIds || []);
         setTotalCount(result.total || 0);
       } else {
@@ -42,10 +56,24 @@ export default function Scholarships() {
     }
   };
 
+  // ✅ 페이지, 정렬, 장학금 유형 변경 시 자동으로 데이터 새로 불러오기
   useEffect(() => {
     fetchScholarships();
-  }, [page, selectedType, sortOrder]); // 유형, 정렬, 페이지 변경 시 호출
+  }, [page, selectedType, sortOrder]);
 
+  // ✅ 장학금 유형 변경 시 1페이지로 초기화
+  const handleTypeChange = (e) => {
+    setSelectedType(e.target.value);
+    setPage(1); // 🔥 1페이지로 초기화
+  };
+
+  // ✅ 정렬 방식 변경 시 1페이지로 초기화
+  const handleSortChange = (e) => {
+    setSortOrder(e.target.value);
+    setPage(1); // 🔥 1페이지로 초기화
+  };
+
+  // ✅ 검색 버튼 클릭 시 API 요청
   const handleSearch = () => {
     setPage(1);
     fetchScholarships();
@@ -55,9 +83,9 @@ export default function Scholarships() {
     setFavorites((prevFavorites) => {
       const updatedFavorites = new Set(prevFavorites);
       if (updatedFavorites.has(id)) {
-        updatedFavorites.delete(id); // 이미 있으면 제거
+        updatedFavorites.delete(id);
       } else {
-        updatedFavorites.add(id); // 없으면 추가
+        updatedFavorites.add(id);
       }
       return updatedFavorites;
     });
@@ -82,24 +110,24 @@ export default function Scholarships() {
           검색
         </button>
 
-        {/* 장학금 유형 구분 */}
+        {/* 장학금 유형 선택 */}
         <select
           value={selectedType}
-          onChange={(e) => setSelectedType(e.target.value)}
+          onChange={handleTypeChange} // ✅ 유형 변경 시 1페이지로 초기화
           className="filter-dropdown"
         >
-           <option value="">모든 유형</option>
-          <option value="undergraduate">지역 연고</option>
-          <option value="graduate">성적 우수</option>
-          <option value="international">소득 구분</option>
-          <option value="international">특기자</option>
-          <option value="international">기타</option>
+          <option value="">모든 유형</option>
+          <option value="regional">지역 연고</option>
+          <option value="academic">성적 우수</option>
+          <option value="income_based">소득 구분</option>
+          <option value="special_talent">특기자</option>
+          <option value="other">기타</option>
         </select>
 
         {/* 장학금 정렬 */}
         <select
           value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
+          onChange={handleSortChange} // ✅ 정렬 변경 시 1페이지로 초기화
           className="sort-dropdown"
         >
           <option value="">정렬 없음</option>
