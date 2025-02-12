@@ -28,7 +28,17 @@ const Userinfor = () => {
   const [selectedSemester, setSelectedSemester] = useState(""); 
   const [selectedGender, setSelectedGender] = useState(""); 
   const [selectedUnivCategory, setSelectedUnivCategory] = useState(""); 
+  const [name, setName] = useState("");  
+  const [birthDate, setBirthDate] = useState("");  
+  const [gpaLast, setGpaLast] = useState("");  
+  const [gpaTotal, setGpaTotal] = useState("");  
+  const [additionalInfo, setAdditionalInfo] = useState("");  
+  const [multiCultureFamily, setMultiCultureFamily] = useState(false);
+  const [singleParentFamily, setSingleParentFamily] = useState(false);
+  const [multipleChildrenFamily, setMultipleChildrenFamily] = useState(false);
+  const [nationalMerit, setNationalMerit] = useState(false);
 
+  
   // 검색어 입력 시 universities.js에서 필터링
   const handleSearch = (e) => {
     const query = e.target.value;
@@ -58,8 +68,55 @@ const Userinfor = () => {
     }
   };
 
-  const handleSave = () => {
-    alert(`장학 정보가 저장되었습니다.`);
+  // ✅ Django 백엔드로 데이터 저장 요청
+  const handleSave = async () => {
+    const token = localStorage.getItem("token");
+    
+    const userInfo = {
+      name,
+      gender: selectedGender || null,
+      birth_date: birthDate ? new Date(birthDate).toISOString().split("T")[0] : null,
+      region: selectedRegion || null,
+      district: selectedDistrict || null,
+      income_level: selectedIncomeLevel || null,
+      university_category: selectedUnivCategory || null,
+      university: selectedUniversity || null,
+      department: selectedDepartment || null,
+      academic_year: selectedAcademicYear || null,
+      semester: selectedSemester || null,
+      gpa_last: gpaLast ? parseFloat(gpaLast) : null,
+      gpa_total: gpaTotal ? parseFloat(gpaTotal) : null,
+      multi_culture_family: !!multiCultureFamily,
+      single_parent_family: !!singleParentFamily,
+      multiple_children_family: !!multipleChildrenFamily,
+      national_merit: !!nationalMerit,
+      additional_info: additionalInfo || null,
+    };
+
+    console.log("🚀 Sending Data:", userInfo);  // 🚀 Django로 보낼 데이터 확인
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/userinfor/scholarship/save/", {
+        method: "POST",
+        headers: {
+          "Authorization": `JWT ${token}`,  // ✅ 사용자 인증 추가
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userInfo),
+      });
+
+      const result = await response.json();
+      console.log("📌 Django Response:", result);  // 📌 Django 응답 확인
+
+      if (response.ok) {
+        alert("장학 정보가 저장되었습니다.");
+      } else {
+        alert("저장 실패");
+      }
+    } catch (error) {
+      console.error("🚨 서버 오류 발생:", error);
+      alert("서버 오류 발생");
+    }
   };
 
   return (
@@ -69,7 +126,7 @@ const Userinfor = () => {
 
         <div className="form-row">
           <label className="form-label">이름</label>
-          <input type="text" className="form-input" placeholder="박장학" />
+          <input type="text" className="form-input" value={name} onChange={(e) => setName(e.target.value)} placeholder="이름 입력" />
         </div>
 
         <div className="form-row">
@@ -90,7 +147,7 @@ const Userinfor = () => {
 
         <div className="form-row">
           <label className="form-label">생년월일</label>
-          <input type="date" className="form-input" min="1900-01-01" max="2100-12-31" />
+          <input type="date" className="form-input"value={birthDate} onChange={(e) => setBirthDate(e.target.value)} min="1900-01-01" max="2100-12-31" />
         </div>
 
         <div className="form-row">
@@ -222,7 +279,7 @@ const Userinfor = () => {
 
             <select className="form-select"
             value={selectedAcademicYear}
-            onChange={(e) => selectedAcademicYear(e.target.value)}
+            onChange={(e) => setSelectedAcademicYear(e.target.value)}
             >
               <option value="">학년 선택</option>
               {academicYears.map((year, index) => (
@@ -251,24 +308,24 @@ const Userinfor = () => {
         <div className="form-row">
           <label className="form-label">성적</label>
           <div className="form-group">
-            <input type="number" className="form-input" step="0.01" placeholder="직전 학기 성적" />
-            <input type="number" className="form-input" step="0.01" placeholder="전체 성적" />
+            <input type="number" className="form-input" step="0.01" placeholder="직전 학기 성적" value={gpaLast} onChange={(e) => setGpaLast(e.target.value)}/>
+            <input type="number" className="form-input" step="0.01" placeholder="전체 성적"  value={gpaTotal} onChange={(e) => setGpaTotal(e.target.value)} />
           </div>
         </div>
 
         <div className="form-row">
           <label className="form-label">기타</label>
           <div className="checkbox-group">
-            <label><input type="checkbox" /> 다문화 가정</label>
-            <label><input type="checkbox" /> 한부모 가정</label>
-            <label><input type="checkbox" /> 다자녀 가정</label>
-            <label><input type="checkbox" /> 국가유공자</label>
+            <label><input type="checkbox" checked={multiCultureFamily} onChange={() => setMultiCultureFamily(!multiCultureFamily)} /> 다문화 가정</label>
+            <label><input type="checkbox" checked={singleParentFamily} onChange={() => setSingleParentFamily(!singleParentFamily)} /> 한부모 가정</label>
+            <label><input type="checkbox" checked={multipleChildrenFamily} onChange={() => setMultipleChildrenFamily(!multipleChildrenFamily)} /> 다자녀 가정</label>
+            <label><input type="checkbox" checked={nationalMerit} onChange={() => setNationalMerit(!nationalMerit)} /> 국가유공자</label>
           </div>
         </div>
 
         <div className="form-row">
           <label className="form-label">추가 정보</label>
-          <textarea className="form-textarea" placeholder="예시) 프랜차이즈 카페에서 주 7시간 근무 중. 소득 분위 관련 장학금을 찾고 있음." />
+          <textarea className="form-textarea" value={additionalInfo} onChange={(e) => setAdditionalInfo(e.target.value)} placeholder="예시) 프랜차이즈 카페에서 주 7시간 근무 중. 소득 분위 관련 장학금을 찾고 있음." />
         </div>
 
         <div className="form-row">
