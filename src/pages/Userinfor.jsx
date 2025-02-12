@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../assets/css/userinfor.css";
 import regions from "../data/regions";  
 import majorFields from "../data/majorFields";  
@@ -14,68 +14,71 @@ const univCategories = ["4년제(5-6년제포함)", "전문대(2-3년제)", "해
 
 const Userinfor = () => {
   const navigate = useNavigate();
-  const [selectedRegion, setSelectedRegion] = useState("");
-  const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [selectedIncomeLevel, setSelectedIncomeLevel] = useState("");
-  const [selectedMajorField, setSelectedMajorField] = useState("");
-  const [selectedUniversity, setSelectedUniversity] = useState(""); 
-  const [selectedDepartment, setSelectedDepartment] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); 
-  const [searchQuery, setSearchQuery] = useState(""); 
-  const [filteredUniversities, setFilteredUniversities] = useState(universities); 
-  const [departments, setDepartments] = useState([]); 
-  const [selectedAcademicYear, setSelectedAcademicYear] = useState(""); 
-  const [selectedSemester, setSelectedSemester] = useState(""); 
-  const [selectedGender, setSelectedGender] = useState(""); 
-  const [selectedUnivCategory, setSelectedUnivCategory] = useState(""); 
-  const [name, setName] = useState("");  
-  const [birthDate, setBirthDate] = useState("");  
-  const [gpaLast, setGpaLast] = useState("");  
-  const [gpaTotal, setGpaTotal] = useState("");  
-  const [additionalInfo, setAdditionalInfo] = useState("");  
-  const [multiCultureFamily, setMultiCultureFamily] = useState(false);
-  const [singleParentFamily, setSingleParentFamily] = useState(false);
-  const [multipleChildrenFamily, setMultipleChildrenFamily] = useState(false);
-  const [nationalMerit, setNationalMerit] = useState(false);
+  const location = useLocation();
+  const existingData = location.state?.scholarshipData || {}; // ✅ 기존 데이터 가져오기
 
-  
-  // 검색어 입력 시 universities.js에서 필터링
+  // ✅ 기존 데이터를 유지하며 기본값 설정
+  const [selectedRegion, setSelectedRegion] = useState(existingData.region || "");
+  const [selectedDistrict, setSelectedDistrict] = useState(existingData.district || "");
+  const [selectedIncomeLevel, setSelectedIncomeLevel] = useState(existingData.income_level || "");
+  const [selectedMajorField, setSelectedMajorField] = useState(existingData.major_field || "");
+  const [selectedUniversity, setSelectedUniversity] = useState(existingData.university || ""); 
+  const [selectedDepartment, setSelectedDepartment] = useState(existingData.department || "");
+  const [selectedAcademicYear, setSelectedAcademicYear] = useState(existingData.academic_year || ""); 
+  const [selectedSemester, setSelectedSemester] = useState(existingData.semester || ""); 
+  const [selectedGender, setSelectedGender] = useState(existingData.gender || ""); 
+  const [selectedUnivCategory, setSelectedUnivCategory] = useState(existingData.university_category || ""); 
+  const [name, setName] = useState(existingData.name || "");  
+  const [birthDate, setBirthDate] = useState(existingData.birth_date || "");  
+  const [gpaLast, setGpaLast] = useState(existingData.gpa_last || "");  
+  const [gpaTotal, setGpaTotal] = useState(existingData.gpa_total || "");  
+  const [additionalInfo, setAdditionalInfo] = useState(existingData.additional_info || "");  
+  const [multiCultureFamily, setMultiCultureFamily] = useState(existingData.multi_culture_family || false);
+  const [singleParentFamily, setSingleParentFamily] = useState(existingData.single_parent_family || false);
+  const [multipleChildrenFamily, setMultipleChildrenFamily] = useState(existingData.multiple_children_family || false);
+  const [nationalMerit, setNationalMerit] = useState(existingData.national_merit || false);
+
+  // ✅ 대학 선택 시 학과 목록 업데이트
+  useEffect(() => {
+    if (selectedUniversity && universitiesWithDepartments[selectedUniversity]) {
+      setDepartments(universitiesWithDepartments[selectedUniversity]);
+    } else {
+      setDepartments([]);
+    }
+  }, [selectedUniversity]);
+
+  // ✅ 대학 검색 필터링
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredUniversities, setFilteredUniversities] = useState(universities);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [departments, setDepartments] = useState([]);
+
   const handleSearch = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
-    if (query.length > 0) {
-      setFilteredUniversities(
-        universities.filter((uni) =>
-          uni.toLowerCase().includes(query.toLowerCase())
-        )
-      );
-    } else {
-      setFilteredUniversities(universities);
-    }
+    setFilteredUniversities(
+      query.length > 0
+        ? universities.filter((uni) =>
+            uni.toLowerCase().includes(query.toLowerCase())
+          )
+        : universities
+    );
   };
 
-  // 대학 선택 시 학과 목록 업데이트
   const handleSelectUniversity = (university) => {
     setSelectedUniversity(university);
     setIsModalOpen(false);
-    setSearchQuery(""); // 검색어 초기화
-
-    // 선택된 대학교의 학과 리스트 불러오기
-    if (universitiesWithDepartments[university]) {
-      setDepartments(universitiesWithDepartments[university]);
-    } else {
-      setDepartments([]); // 학과 정보가 없을 경우 빈 배열 유지
-    }
+    setSearchQuery("");
   };
 
   // ✅ Django 백엔드로 데이터 저장 요청
   const handleSave = async () => {
     const token = localStorage.getItem("token");
-    
+
     const userInfo = {
       name,
       gender: selectedGender || null,
-      birth_date: birthDate ? new Date(birthDate).toISOString().split("T")[0] : null,
+      birth_date: birthDate || null,
       region: selectedRegion || null,
       district: selectedDistrict || null,
       income_level: selectedIncomeLevel || null,
@@ -93,20 +96,15 @@ const Userinfor = () => {
       additional_info: additionalInfo || null,
     };
 
-    console.log("🚀 Sending Data:", userInfo);  // 🚀 Django로 보낼 데이터 확인
-
     try {
       const response = await fetch("http://127.0.0.1:8000/userinfor/scholarship/save/", {
         method: "POST",
         headers: {
-          "Authorization": `JWT ${token}`,  // ✅ 사용자 인증 추가
+          "Authorization": `JWT ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userInfo),
       });
-
-      const result = await response.json();
-      console.log("📌 Django Response:", result);  // 📌 Django 응답 확인
 
       if (response.ok) {
         alert("장학 정보가 저장되었습니다.");
@@ -114,7 +112,6 @@ const Userinfor = () => {
         alert("저장 실패");
       }
     } catch (error) {
-      console.error("🚨 서버 오류 발생:", error);
       alert("서버 오류 발생");
     }
   };

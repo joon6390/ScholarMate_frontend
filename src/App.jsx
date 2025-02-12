@@ -5,7 +5,7 @@ import Scholarships from "./pages/Scholarships";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Myinfor from "./pages/Userinfor";
+import Useinfor from "./pages/Userinfor";
 import PrivateRoute from "./components/PrivateRoute"; // 
 import logo from "./assets/img/logo.png";  
 
@@ -45,7 +45,7 @@ export default function App() {
           <Link to="/recommendations" className="nav-btn">추천 장학금</Link>
           <Link to="/community" className="nav-btn">관심 장학금</Link>
           <Link to="/calendar" className="nav-btn">개인 장학 캘린더</Link>
-          <Link to="/support" className="nav-btn">개인 장학 정보</Link>
+          <Link to="/Userinfor" className="nav-btn">개인 장학 정보</Link>
         </nav>
         <div className="header-right">
           {isLoggedIn ? (
@@ -95,10 +95,10 @@ export default function App() {
             }
           />
           <Route
-            path="/support"
+            path="/Userinfor"
             element={
               <PrivateRoute isLoggedIn={isLoggedIn}>
-                <Myinfor />
+                <Useinfor />
               </PrivateRoute>
             }
           />
