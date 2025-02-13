@@ -1,0 +1,134 @@
+/* ✅ 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+li {
+    list-style: none;
+}
+
+.blind {
+    width: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+    position: absolute;
+    text-indent: -9999px;
+}
+
+.section {
+    padding: 100px 0;
+}
+
+/* ✅ 텍스트 스타일 수정 */
+.imgText__txt {
+    width: 40%; /* ✅ 기존보다 넓게 */
+    padding: 20px; /* ✅ 안쪽 여백 조정 */
+    text-align: left !important; /* ✅ 텍스트 왼쪽 정렬 */
+}
+
+/* ✅ 전체 레이아웃 조정 */
+.imgText__inner {
+    display: flex;
+    justify-content: flex-start; /* ✅ 왼쪽 정렬 */
+    align-items: center;
+    width: 100%;
+    background-color: #F5F5F5;
+    padding: 80px 120px; /* ✅ 좌우 간격 조정 */
+    gap: 40px; /* ✅ 텍스트와 이미지 사이 간격 조정 */
+}
+
+.imgText__inner > div {
+    width: 32%;
+    height: 500px;
+}
+
+/* ✅ 텍스트 영역 */
+.imgText__txt .small {
+    font-size: 16px;
+    color: #666;
+    text-decoration: underline;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.imgText__txt .title {
+    font-size: 50px;
+    font-weight: 300;
+    word-break: keep-all;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    text-align: left; /* 추가: desc만 따로 왼쪽 정렬 */
+}
+
+.imgText__txt .desc {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #666;
+    margin-bottom: 10px;
+    text-align: left; /* 추가: desc만 따로 왼쪽 정렬 */
+}
+
+.imgText__txt .list {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.imgText__txt .list li {
+    position: relative;
+    padding-left: 20px;
+}
+
+.imgText__txt .list li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: #666;
+    border-radius: 50%;
+    position: absolute;
+    left: 5px;
+    top: 9px;
+}
+
+.imgText__txt .list li a {
+    color: #666;
+}
+
+/* ✅ 이미지 스타일 */
+.imgText__img {
+    border-radius: 10px;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    max-width: 400px; /* 적당한 크기로 조절 */
+    max-height: 300px;
+    margin-bottom: 150px;
+    
+}
+
+.imgText__img a {
+    background-color: #7C2B39;
+    color: #fff;
+    padding: 10px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    display: inline-block;
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+}
+
+.imgText__img a.blue {
+    background-color: #2B387C;
+}
+
+
