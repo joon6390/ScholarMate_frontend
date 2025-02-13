@@ -134,7 +134,6 @@ export default function Profile() {
           <p><strong>수료 학기:</strong> {scholarshipData.semester || "없음"}</p>
           <p><strong>최근 학기 성적:</strong> {scholarshipData.gpa_last || "없음"}</p>
           <p><strong>전체 성적:</strong> {scholarshipData.gpa_total || "없음"}</p>
-          <h3>기타 정보</h3>
           <p><strong>다문화 가정:</strong> {scholarshipData.multi_culture_family ? "예" : "아니오"}</p>
           <p><strong>한부모 가정:</strong> {scholarshipData.single_parent_family ? "예" : "아니오"}</p>
           <p><strong>다자녀 가정:</strong> {scholarshipData.multiple_children_family ? "예" : "아니오"}</p>

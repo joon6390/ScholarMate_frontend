@@ -6,18 +6,19 @@ html, body {
     padding: 0;
     overflow-x: hidden; /* 가로 스크롤 방지 */
     font-family: "Poppins", Arial, sans-serif;
-    background: #f4f7f9; 
+    background: #f4f7f9;
     color: #333;
 }
 
-/* 컨테이너 */
-.home-container {
+/* 공통 컨테이너 (홈 페이지에서만 적용되도록) */
+.home-container:not(.scholarships-container) {
     text-align: center;
     width: 100vw;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* 수직 중앙 정렬 */
     overflow-x: hidden; /* 가로 넘침 방지 */
 }
 
@@ -27,7 +28,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 30px; 
+    padding: 15px 30px;
     background: white;
     border-bottom: 1px solid #ddd;
     position: fixed;
@@ -35,8 +36,18 @@ html, body {
     left: 0;
     height: 80px; /* 고정 높이 */
     z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
-    box-sizing: border-box; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+
+/* 장학금 페이지가 영향을 받지 않도록 함 */
+.scholarships-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    margin-top: 100px; /* 헤더와 겹치지 않게 */
 }
 
 /* 로고 및 제목 */
@@ -126,73 +137,6 @@ html, body {
     transform: scale(1.05);
 }
 
-/* 메인 컨텐츠 */
-.content {
-    margin-top: 80px; /* 헤더와 간격 유지 */
-    max-width: 800px;
-    font-size: 1rem;
-    text-align: left;
-    padding: 10px;
-    color: #2c3e50; 
-    line-height: 2; /* 가독성 향상 */
-}
-
-/* 푸터 */
-.footer {
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    font-size: 1rem;
-    position: relative;
-    border-top: 1px solid #ddd; /* 부드러운 구분선 */
-    color: #333; 
-}
-
-/* 🟢 메인 배너 스타일 */
-.banner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #f4f7f9; /* 부드러운 배경색 */
-    padding: 20px;
-    margin-top: 100px; /* 헤더와 간격 조정 */
-    border-radius: 10px; /* 모서리 둥글게 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 가벼운 그림자 */
-    max-width: 1200px;
-    margin: 100px auto;
-}
-
-/* 배너 텍스트 */
-.banner-content {
-    max-width: 600px;
-    padding: 20px;
-    color: #333;
-    text-align: left;
-}
-
-.banner-content h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 15px;
-}
-
-.banner-content p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    color: #555;
-}
-
-/* 배너 이미지 */
-.banner-image img {
-    max-width: 500px;
-    border-radius: 10px;
-    object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* 반응형 디자인 */
-
 /* 태블릿 (768px 이하) */
 @media (max-width: 768px) {
     .header {
@@ -214,20 +158,6 @@ html, body {
         justify-content: flex-end;
         gap: 8px;
     }
-
-    .banner {
-        flex-direction: column; /* 세로 배치 */
-        text-align: center;
-    }
-
-    .banner-content {
-        max-width: 100%;
-    }
-
-    .banner-image img {
-        max-width: 100%;
-        margin-top: 20px;
-    }
 }
 
 /* 모바일 (480px 이하) */
@@ -239,12 +169,6 @@ html, body {
         align-items: center;
         gap: 10px;
     }    
-    
-    .banner {
-        padding: 10px;
-        flex-direction: column; /* 세로 배치 */
-        text-align: center;
-    }
 
     .header-left h1 {
         font-size: 1.5rem;

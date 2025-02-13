@@ -107,7 +107,6 @@ export default function Scholarships() {
 
   return (
     <div className="scholarships-container">
-      <h1>장학금 목록</h1>
 
       {/* 검색창 및 필터 */}
       <div className="search-and-filter">

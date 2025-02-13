@@ -1,25 +1,15 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
-  color: #212529;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px; /* 모바일에서 추가 여백 */
-}
-
+/* 프로필 박스: 중앙 정렬 + 아래로 내리기 */
 .profile-box {
   background: #ffffff;
   width: 100%;
   max-width: 900px;
-  padding: 50px; /* 모바일에서도 보기 좋은 기본 패딩 */
+  padding: 50px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-left: 270px;
+  
+  /* 추가된 코드 */
+  margin-top: 50px; /* 박스를 아래로 내리기 */
 }
 
 .title {

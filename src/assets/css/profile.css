@@ -1,22 +1,24 @@
-/* 공통 스타일 */
+/* ✅ profile-container 수정 (오른쪽으로 이동) */
 .profile-container {
-  top: 100px;
-  left: 20px;
-  width: 500px; /* 기본 폭 */
+  width: 500px;
+  max-width: 90%;
+  margin: 100px auto 20px auto; /* ✅ 중앙 정렬 */
+  margin-left: 10%; /* ✅ 화면 중앙보다 오른쪽으로 이동 */
   font-family: Arial, sans-serif;
 }
 
+/* 프로필 헤더 */
 .profile-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* ✅ 헤더와 내용 간 간격 추가 */
   border-bottom: 1px solid #ddd;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
 }
 
 .profile-header div {
-  margin-right: 20px; /* 왼쪽 글씨와 버튼 사이 간격 */
+  margin-right: 20px;
 }
 
 .profile-header div h2 {
@@ -35,8 +37,9 @@
   margin-left: auto;
 }
 
+/* 버튼 스타일 */
 .btn {
-  padding: 10px 15px;
+  padding: 12px 18px; /* ✅ 버튼 크기 증가 */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -53,16 +56,24 @@
   background-color: #0056b3;
 }
 
+/* 프로필 카드 */
 .profile-card {
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 20px;
+  padding: 25px; /* ✅ 패딩 증가 */
   background-color: #f9f9f9;
-  margin-top: 20px;
-  position: relative; /* 🔥 버튼 위치 조정을 위한 추가 */
+  margin-top: 30px; /* ✅ 카드 간격 증가 */
+  position: relative;
 }
 
-/* ✅ 장학 정보 카드 내부 버튼을 우측 상단 고정 */
+/* 카드 내부 간격 */
+.profile-card p {
+  margin-bottom: 12px; /* ✅ 각 정보 간 간격 추가 */
+  line-height: 1.6;
+  margin-top: 15px;
+}
+
+/* 카드 헤더 */
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -72,19 +83,19 @@
 
 .card-header h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
-/* ✅ 버튼 크기 조정 및 한 줄 유지 */
+/* 버튼 위치 조정 */
 .edit-btn {
   background-color: #3498db;
   color: white;
-  padding: 8px 10px;
+  padding: 10px 14px; /* ✅ 버튼 크기 증가 */
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 13px;
-  white-space: nowrap; /* 🔥 버튼이 두 줄로 내려가지 않도록 고정 */
+  font-size: 14px;
+  white-space: nowrap;
   position: absolute;
   right: 15px;
   top: 10px;
@@ -94,34 +105,32 @@
   background-color: #0056b3;
 }
 
-.edit-info {
-  font-size: 12px;
-  color: #888;
-  margin-top: 5px;
-}
-
 /* 반응형 디자인 */
 
 /* 태블릿 크기 (768px 이하) */
 @media (max-width: 768px) {
   .profile-container {
-    width: 90%; /* 폭을 화면에 맞게 확장 */
-    left: 5%; /* 가운데 정렬 효과 */
-    top: 80px; /* 조금 더 상단으로 이동 */
+    width: 90%;
+    left: 10%; /* 태블릿에서는 중앙 정렬 */
+    top: 80px;
   }
 
   .profile-header div h2 {
-    font-size: 1.2rem; /* 제목 크기 감소 */
+    font-size: 1.2rem;
   }
 
   .btn {
-    padding: 8px 12px; /* 버튼 크기 축소 */
+    padding: 10px 14px;
     font-size: 12px;
   }
 
+  .profile-card {
+    padding: 20px;
+  }
+
   .edit-btn {
-    font-size: 12px; /* 🔥 반응형에서도 글자 크기 유지 */
-    padding: 6px 8px;
+    font-size: 12px;
+    padding: 8px 10px;
     right: 10px;
   }
 }
@@ -129,38 +138,38 @@
 /* 모바일 크기 (480px 이하) */
 @media (max-width: 480px) {
   .profile-container {
-    width: 100%; /* 폭을 화면에 꽉 차게 설정 */
-    left: 0; /* 좌우 여백 제거 */
+    width: 100%;
+    left: 0;
     padding: 10px;
-    top: 60px; /* 상단 여백 축소 */
+    top: 60px;
   }
 
   .profile-header {
-    flex-direction: column; /* 세로 배치로 전환 */
-    align-items: flex-start; /* 왼쪽 정렬 */
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .profile-header div {
-    margin-right: 0; /* 간격 제거 */
-    margin-bottom: 10px; /* 아래쪽 간격 추가 */
+    margin-right: 0;
+    margin-bottom: 15px; /* ✅ 모바일에서 간격 추가 */
   }
 
   .profile-header div h2 {
-    font-size: 1.1rem; /* 제목 크기 더 축소 */
+    font-size: 1.1rem;
   }
 
   .profile-card {
-    padding: 15px; /* 카드 안쪽 여백 축소 */
+    padding: 18px;
   }
 
   .card-header {
-    flex-direction: column; /* 모바일에서 버튼과 제목 세로 배치 */
+    flex-direction: column;
     align-items: flex-start;
   }
 
   .edit-btn {
-    font-size: 11px; /* 모바일에서 버튼 크기 최적화 */
-    padding: 5px 7px;
+    font-size: 11px;
+    padding: 7px 10px;
     right: 5px;
     top: 5px;
   }
