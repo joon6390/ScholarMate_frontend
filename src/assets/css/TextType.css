@@ -1,0 +1,95 @@
+.text__wrap {
+    padding: 120px 0;
+    text-align: center;
+}
+
+.text__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+/* 📌 카드 스타일 */
+.text {
+    width: 32%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    transition: background 0.3s;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 150px; /* 카드 높이 조정 */
+    margin-top: 50px;
+}
+
+.text:hover {
+    background: #F5F5F5;
+}
+
+/* 📌 제목 + 아이콘 정렬 */
+.text__title {
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 아이콘과 텍스트 사이 간격 */
+}
+
+.text__icon {
+    font-size: 28px; /* 아이콘 크기 */
+    color: #2c3e50; /* 아이콘 색상 */
+    margin-right: 10px;
+    flex-shrink: 0; /* 아이콘 크기 유지 */
+}
+
+/* 📌 반응형 스타일링 */
+@media (max-width: 768px) {
+    .text__icon {
+        font-size: 24px; /* 모바일에서는 아이콘 크기 조절 */
+    }
+}
+
+/* 📌 설명 스타일 (높이 고정) */
+.text__desc {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.4;
+    color: #666;
+    flex-grow: 1;
+}
+
+/* 📌 "더보기" 버튼 */
+.text__btn {
+    font-size: 16px;
+    text-decoration: underline;
+    color: #666;
+    align-self: flex-start;
+}
+
+/* 📌 반응형 (태블릿 이하) */
+@media (max-width: 1024px) {
+    .text {
+        width: 48%; /* 2개씩 배치 */
+    }
+}
+
+/* 📌 반응형 (모바일) */
+@media (max-width: 768px) {
+    .text {
+        width: 100%; /* 1개씩 배치 */
+        height: auto;
+    }
+    .text__title {
+        font-size: 20px;
+    }
+    .text__icon {
+        width: 50px;
+        height: 50px;
+        background-size: 300px 50px;
+    }
+}
