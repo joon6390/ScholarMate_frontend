@@ -1,5 +1,5 @@
 import "../assets/css/Slider.css"; 
-import sliderImage from "../assets/img/slider_bg01.jpg"; 
+import sliderImage from "../assets/img/메인.jpg"; 
 
 export default function Slider() {
   return (

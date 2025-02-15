@@ -1,30 +1,3 @@
-@import url('https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css');
-
-body, .nexon {
-    font-family: 'Pretendard', sans-serif;
-}
-
-/* reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-a {
-    text-decoration: none;
-    color: #fff;
-}
-
-.blind {
-    width: 0;
-    height: 0;
-    line-height: 0;
-    overflow: hidden;
-    position: absolute;
-    text-indent: -9999px;
-}
-
 /* bannerType */
 .banner__wrap {
     display: flex;
@@ -53,4 +26,3 @@ a {
     font-weight: 300;
     margin-bottom: 50px; /* ✅ 간격 줄임 */
 }
-

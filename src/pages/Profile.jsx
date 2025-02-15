@@ -9,7 +9,7 @@ export default function Profile() {
   const [scholarshipData, setScholarshipData] = useState(null);
   const [error, setError] = useState("");
 
-  // ✅ Axios 인스턴스 생성
+  // Axios 인스턴스 생성
   const api = axios.create({
     baseURL: "http://127.0.0.1:8000",
     headers: {
@@ -17,7 +17,7 @@ export default function Profile() {
     },
   });
 
-  // ✅ 리프레시 토큰을 사용하여 새로운 액세스 토큰을 가져오는 함수
+  // 리프레시 토큰을 사용하여 새로운 액세스 토큰을 가져오는 함수
   const refreshAccessToken = async () => {
     try {
       const refreshToken = localStorage.getItem("refreshToken");
@@ -40,12 +40,12 @@ export default function Profile() {
       setError("세션이 만료되었습니다. 다시 로그인해주세요.");
       localStorage.removeItem("token");
       localStorage.removeItem("refreshToken");
-      navigate("/login"); // ✅ 로그인 페이지로 이동
+      navigate("/login"); // 로그인 페이지로 이동
       return null;
     }
   };
 
-  // ✅ 회원 기본 정보 가져오기
+  // 회원 기본 정보 가져오기
   const fetchUserData = async () => {
     try {
       const response = await api.get("/auth/users/me/");
@@ -55,7 +55,7 @@ export default function Profile() {
         console.log("🔄 액세스 토큰 만료됨, 새로 갱신 시도...");
         const newToken = await refreshAccessToken();
         if (newToken) {
-          fetchUserData(); // ✅ 갱신 후 다시 데이터 요청
+          fetchUserData(); // 갱신 후 다시 데이터 요청
         }
       } else {
         console.error("🚨 사용자 정보를 불러오지 못했습니다:", err);
@@ -64,7 +64,7 @@ export default function Profile() {
     }
   };
 
-  // ✅ 사용자 장학 정보 가져오기
+  // 사용자 장학 정보 가져오기
   const fetchScholarshipData = async () => {
     try {
       const response = await api.get("/userinfor/scholarship/get/");
@@ -74,10 +74,10 @@ export default function Profile() {
         console.log("🔄 장학 정보 불러오기 실패, 토큰 갱신 시도...");
         const newToken = await refreshAccessToken();
         if (newToken) {
-          fetchScholarshipData(); // ✅ 갱신 후 다시 데이터 요청
+          fetchScholarshipData(); // 갱신 후 다시 데이터 요청
         }
       } else if (err.response?.status === 404) {
-        setScholarshipData(null); // ✅ 장학 정보가 없을 경우 처리
+        setScholarshipData(null); // 장학 정보가 없을 경우 처리
       } else {
         console.error("🚨 장학 정보를 불러오지 못했습니다:", err);
         setError("장학 정보를 불러오지 못했습니다.");
@@ -85,7 +85,7 @@ export default function Profile() {
     }
   };
 
-  // ✅ 페이지 로딩 시 데이터 가져오기
+  // 페이지 로딩 시 데이터 가져오기
   useEffect(() => {
     fetchUserData();
     fetchScholarshipData();

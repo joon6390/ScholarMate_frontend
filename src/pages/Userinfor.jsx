@@ -15,9 +15,9 @@ const univCategories = ["4년제(5-6년제포함)", "전문대(2-3년제)", "해
 const Userinfor = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const existingData = location.state?.scholarshipData || {}; // ✅ 기존 데이터 가져오기
+  const existingData = location.state?.scholarshipData || {}; // 기존 데이터 가져오기
 
-  // ✅ 기존 데이터를 유지하며 기본값 설정
+  // 기존 데이터를 유지하며 기본값 설정
   const [selectedRegion, setSelectedRegion] = useState(existingData.region || "");
   const [selectedDistrict, setSelectedDistrict] = useState(existingData.district || "");
   const [selectedIncomeLevel, setSelectedIncomeLevel] = useState(existingData.income_level || "");
@@ -38,7 +38,7 @@ const Userinfor = () => {
   const [multipleChildrenFamily, setMultipleChildrenFamily] = useState(existingData.multiple_children_family || false);
   const [nationalMerit, setNationalMerit] = useState(existingData.national_merit || false);
 
-  // ✅ 대학 선택 시 학과 목록 업데이트
+  // 대학 선택 시 학과 목록 업데이트
   useEffect(() => {
     if (selectedUniversity && universitiesWithDepartments[selectedUniversity]) {
       setDepartments(universitiesWithDepartments[selectedUniversity]);
@@ -47,7 +47,7 @@ const Userinfor = () => {
     }
   }, [selectedUniversity]);
 
-  // ✅ 대학 검색 필터링
+  // 대학 검색 필터링
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredUniversities, setFilteredUniversities] = useState(universities);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,7 +71,7 @@ const Userinfor = () => {
     setSearchQuery("");
   };
 
-  // ✅ Django 백엔드로 데이터 저장 요청
+  // Django 백엔드로 데이터 저장 요청
   const handleSave = async () => {
     const token = localStorage.getItem("token");
 

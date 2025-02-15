@@ -15,17 +15,17 @@ const CardSection = () => {
           통합된 장학금 데이터 목록을 <br /> 조회하세요.
         </>
       ),
-      link: "/"
+      link: "/scholarships"
     },
     {
       image: cardImg2,
-      title: "개인 장학 정보",
+      title: "나의 장학 정보",
       description: (
         <>
           개인 맞춤형 장학금 추천을 위한 <br /> 정보를 입력하세요.
         </>
       ),
-      link: "/"
+      link: "/Userinfor"
     },
     {
       image: cardImg3,
@@ -35,7 +35,7 @@ const CardSection = () => {
           입력하신 정보를 바탕으로 <br /> 개인 맞춤형 장학금을 만나보세요.
         </>
       ),
-      link: "/"
+      link: "/recommendations"
     }
   ];
 

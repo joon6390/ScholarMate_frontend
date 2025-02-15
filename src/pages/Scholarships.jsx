@@ -13,11 +13,11 @@ export default function Scholarships() {
   const [sortOrder, setSortOrder] = useState("");
   const [favorites, setFavorites] = useState(new Set());
 
-  // ✅ 모달 상태 추가
+  // 모달 상태 추가
   const [selectedScholarship, setSelectedScholarship] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // ✅ Django 백엔드에서 사용하는 학자금 유형과 매핑
+  // Django 백엔드에서 사용하는 학자금 유형과 매핑
   const scholarshipTypeMapping = {
     regional: "지역연고",
     academic: "성적우수",
@@ -26,13 +26,13 @@ export default function Scholarships() {
     other: "기타",
   };
 
-  // ✅ API URL을 생성하는 함수
+  // API URL을 생성하는 함수
   const buildApiUrl = () => {
     const typeParam = scholarshipTypeMapping[selectedType] || "";
     return `http://localhost:8000/scholarships/api/scholarships/?page=${page}&perPage=${perPage}&search=${searchQuery}&type=${typeParam}&sort=${sortOrder}`;
   };
 
-  // ✅ API 요청 함수
+  // API 요청 함수
   const fetchScholarships = async () => {
     setLoading(true);
     setError(null);
@@ -64,13 +64,13 @@ export default function Scholarships() {
     fetchScholarships();
   }, [page, selectedType, sortOrder]);
 
-  // ✅ 모달 열기
+  // 모달 열기
   const openModal = (scholarship) => {
     setSelectedScholarship(scholarship);
     setIsModalOpen(true);
   };
 
-  // ✅ 모달 닫기
+  // 모달 닫기
   const closeModal = () => {
     setSelectedScholarship(null);
     setIsModalOpen(false);
@@ -199,7 +199,7 @@ export default function Scholarships() {
         </>
       )}
 
-      {/* ✅ 모달창 */}
+      {/* 모달창 */}
       {isModalOpen && selectedScholarship && (
         <div className="modal-overlay">
           <div className="modal-content">

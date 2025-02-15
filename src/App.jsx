@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Useinfor from "./pages/Userinfor";
 import PrivateRoute from "./components/PrivateRoute"; // 
-import logo from "./assets/img/logo.png";  
+import logo from "./assets/img/로고.png";  
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,9 +43,9 @@ export default function App() {
         <nav className="nav">
           <Link to="/scholarships" className="nav-btn">전체 장학금</Link>
           <Link to="/recommendations" className="nav-btn">추천 장학금</Link>
-          <Link to="/community" className="nav-btn">관심 장학금</Link>
-          <Link to="/calendar" className="nav-btn">개인 장학 캘린더</Link>
-          <Link to="/Userinfor" className="nav-btn">개인 장학 정보</Link>
+          <Link to="/interest" className="nav-btn">관심 장학금</Link>
+          <Link to="/calendar" className="nav-btn">나의 장학 캘린더</Link>
+          <Link to="/Userinfor" className="nav-btn">나의 장학 정보</Link>
         </nav>
         <div className="header-right">
           {isLoggedIn ? (
@@ -79,7 +79,7 @@ export default function App() {
             }
           />
           <Route
-            path="/community"
+            path="/interest"
             element={
               <PrivateRoute isLoggedIn={isLoggedIn}>
                 <div>관심 장학금 페이지입니다.</div>

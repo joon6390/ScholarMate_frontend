@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // 추가
 import "../assets/css/Card.css";
 
 const Card = ({ image, title, description, link }) => {
@@ -8,9 +9,9 @@ const Card = ({ image, title, description, link }) => {
       <div className="card__body">
         <h3 className="tit">{title}</h3>
         <p className="desc">{description}</p>
-        <a className="btn" href={link}>
+        <Link className="btn" to={link}> {/* Link 사용 */}
           바로가기 →
-        </a>
+        </Link>
       </div>
     </article>
   );
