@@ -5,6 +5,7 @@
   margin: 100px auto 20px auto; /* ✅ 중앙 정렬 */
   margin-left: 10%; /* ✅ 화면 중앙보다 오른쪽으로 이동 */
   font-family: Arial, sans-serif;
+  margin-top: 550px;
 }
 
 /* 프로필 헤더 */

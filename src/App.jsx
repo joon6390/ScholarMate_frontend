@@ -47,16 +47,22 @@ export default function App() {
           <Link to="/calendar" className="nav-btn">나의 장학 캘린더</Link>
           <Link to="/Userinfor" className="nav-btn">나의 장학 정보</Link>
         </nav>
-        <div className="header-right">
+        <div className="header-right" style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          {/* 마이페이지 버튼 (로그인 상태일 때는 보이고, 로그아웃 상태일 때는 invisible 처리) */}
           {isLoggedIn ? (
-            <>
-              <button className="login-btn" onClick={() => navigate("/profile")}>마이페이지</button>
-              <button className="logout-btn" onClick={handleLogout}>로그아웃</button>
-            </>
+            <button className="login-btn" onClick={() => navigate("/profile")}>마이페이지</button>
+          ) : (
+            <button className="login-btn" style={{ visibility: "hidden" }}>마이페이지</button>
+          )}
+          
+          {/* 로그인/로그아웃 버튼 */}
+          {isLoggedIn ? (
+            <button className="logout-btn" onClick={handleLogout}>로그아웃</button>
           ) : (
             <button className="login-btn" onClick={() => navigate("/login")}>로그인</button>
           )}
         </div>
+
       </header>
 
       <main className="content">

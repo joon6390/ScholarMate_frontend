@@ -27,9 +27,14 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden; /* 가로 스크롤 방지 */
-    font-family: "Poppins", Arial, sans-serif;
     background: #ffffff;
     color: #333;
+    margin-top: 1000px;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* 가로 정렬 */
+    align-items: center;     /* 세로 정렬 */
 }
 
 /* 공통 컨테이너 (홈 페이지에서만 적용되도록) */
@@ -42,6 +47,7 @@ html, body {
     align-items: center;
     justify-content: center; /* 수직 중앙 정렬 */
     overflow-x: hidden; /* 가로 넘침 방지 */
+    margin-top: 4300px;
 }
 
 /* 헤더 */
