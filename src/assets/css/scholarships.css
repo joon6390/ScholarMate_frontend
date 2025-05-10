@@ -229,5 +229,73 @@ h1 {
   background: #cc0000;
 }
 
+.delete-btn {
+  color: white;
+  background-color: #ff4d4d;
+  padding: 5px 10px;
+  margin-left: 8px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+}
+
+/* 관심 장학금 목록 외부 래퍼 고정 */
+.wishlist-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* 테이블 스크롤 가능한 영역 */
+.wishlist-table-container {
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+/* 테이블 고정 헤더 */
+.wishlist-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.wishlist-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #f0f0f0;
+  z-index: 2;
+}
+
+.wishlist-table th,
+.wishlist-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* 반응형에서 높이 조정 */
+@media (max-width: 768px) {
+  .wishlist-table-container {
+    max-height: 300px;
+  }
+
+  .wishlist-table th,
+  .wishlist-table td {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+}
+
+
+
+
+
 
 

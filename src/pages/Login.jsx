@@ -28,8 +28,8 @@ export default function Login({ onLogin }) {
       // 로그인 상태 업데이트 (부모 컴포넌트에 알림)
       onLogin();
 
-      // 프로필 페이지로 이동
-      navigate("/profile");
+      // ✅ 로그인 후 강제 새로고침 → 토큰이 즉시 반영되도록
+      window.location.href = "/"; // 또는 원하는 리디렉션 주소
     } catch (error) {
       setErrorMessage("아이디 또는 비밀번호가 올바르지 않습니다.");
     }

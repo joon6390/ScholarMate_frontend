@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Useinfor from "./pages/Userinfor";
 import PrivateRoute from "./components/PrivateRoute"; // 
 import logo from "./assets/img/로고.png";  
+import Wishlist from "./components/Wishlist";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,7 +21,6 @@ export default function App() {
   }, [location.pathname]);
 
   const handleLogin = () => {
-    localStorage.setItem("token", "mockToken");
     setIsLoggedIn(true);
     navigate("/");
   };
@@ -88,7 +88,7 @@ export default function App() {
             path="/interest"
             element={
               <PrivateRoute isLoggedIn={isLoggedIn}>
-                <div>관심 장학금 페이지입니다.</div>
+                <Wishlist />
               </PrivateRoute>
             }
           />

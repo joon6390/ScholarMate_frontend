@@ -13,11 +13,9 @@ export default function Scholarships() {
   const [sortOrder, setSortOrder] = useState("");
   const [favorites, setFavorites] = useState(new Set());
 
-  // 모달 상태 추가
   const [selectedScholarship, setSelectedScholarship] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Django 백엔드에서 사용하는 학자금 유형과 매핑
   const scholarshipTypeMapping = {
     regional: "지역연고",
     academic: "성적우수",
@@ -26,13 +24,11 @@ export default function Scholarships() {
     other: "기타",
   };
 
-  // API URL을 생성하는 함수
   const buildApiUrl = () => {
     const typeParam = scholarshipTypeMapping[selectedType] || "";
     return `http://localhost:8000/scholarships/api/scholarships/?page=${page}&perPage=${perPage}&search=${searchQuery}&type=${typeParam}&sort=${sortOrder}`;
   };
 
-  // API 요청 함수
   const fetchScholarships = async () => {
     setLoading(true);
     setError(null);
@@ -60,17 +56,33 @@ export default function Scholarships() {
     }
   };
 
+  const fetchFavorites = async () => {
+    try {
+      const res = await fetch("http://localhost:8000/scholarships/api/wishlist/", {
+        headers: {
+          Authorization: `JWT ${localStorage.getItem("token")}`,
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const ids = data.map((item) => `${item.scholarship.name}_${item.scholarship.foundation_name}`);
+        setFavorites(new Set(ids));
+      }
+    } catch (err) {
+      console.log("찜 불러오기 실패", err);
+    }
+  };
+
   useEffect(() => {
     fetchScholarships();
+    fetchFavorites();
   }, [page, selectedType, sortOrder]);
 
-  // 모달 열기
   const openModal = (scholarship) => {
     setSelectedScholarship(scholarship);
     setIsModalOpen(true);
   };
 
-  // 모달 닫기
   const closeModal = () => {
     setSelectedScholarship(null);
     setIsModalOpen(false);
@@ -91,24 +103,56 @@ export default function Scholarships() {
     fetchScholarships();
   };
 
-  const handleFavoriteToggle = (id) => {
-    setFavorites((prevFavorites) => {
-      const updatedFavorites = new Set(prevFavorites);
-      if (updatedFavorites.has(id)) {
-        updatedFavorites.delete(id);
+  const handleFavoriteToggle = async (item) => {
+    const id = `${item["상품명"]}_${item["운영기관명"]}`;
+    const isFavorited = favorites.has(id);
+  
+    const url = isFavorited
+      ? "http://localhost:8000/scholarships/api/wishlist/toggle/"
+      : "http://localhost:8000/scholarships/api/wishlist/add-from-api/";
+  
+    const method = "POST";
+  
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(
+          isFavorited
+            ? { product_id: id, action: "remove" } // 삭제용 토글 요청
+            : item
+        ),
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        setFavorites((prev) => {
+          const updated = new Set(prev);
+          if (isFavorited) {
+            updated.delete(id);
+          } else {
+            updated.add(id);
+          }
+          return updated;
+        });
+  
+        alert(isFavorited ? "관심 장학금에서 삭제되었습니다." : "관심 장학금에 추가되었습니다.");
       } else {
-        updatedFavorites.add(id);
+        alert(result?.error || "서버 오류");
       }
-      return updatedFavorites;
-    });
-  };
+    } catch (err) {
+      alert("찜 처리 중 오류 발생");
+    }
+  };  
 
   const totalPages = Math.ceil(totalCount / perPage);
 
   return (
     <div className="scholarships-container">
-
-      {/* 검색창 및 필터 */}
       <div className="search-and-filter">
         <input
           type="text"
@@ -117,9 +161,7 @@ export default function Scholarships() {
           onChange={(e) => setSearchQuery(e.target.value)}
           className="search-input"
         />
-        <button onClick={handleSearch} className="search-btn">
-          검색
-        </button>
+        <button onClick={handleSearch} className="search-btn">검색</button>
 
         <select value={selectedType} onChange={handleTypeChange} className="filter-dropdown">
           <option value="">모든 유형</option>
@@ -167,16 +209,13 @@ export default function Scholarships() {
                     </button>
                   </td>
                   <td>
-                    <button 
-                      onClick={() => window.open(item["홈페이지 주소"], "_blank")}
-                      className="details-btn"
-                    >
+                    <button onClick={() => window.open(item["홈페이지 주소"], "_blank")} className="details-btn">
                       홈페이지 보기
                     </button>
                   </td>
                   <td>
                     <button
-                      onClick={() => handleFavoriteToggle(item.id)}
+                      onClick={() => handleFavoriteToggle(item)}
                       className={`favorite-btn ${favorites.has(item.id) ? "favorited" : ""}`}
                     >
                       {favorites.has(item.id) ? "❤️" : "🤍"}
@@ -199,7 +238,6 @@ export default function Scholarships() {
         </>
       )}
 
-      {/* 모달창 */}
       {isModalOpen && selectedScholarship && (
         <div className="modal-overlay">
           <div className="modal-content">
