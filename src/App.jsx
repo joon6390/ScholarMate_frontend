@@ -10,6 +10,16 @@ import PrivateRoute from "./components/PrivateRoute"; //
 import logo from "./assets/img/로고.png";  
 import Wishlist from "./components/Wishlist";
 
+export function isTokenExpired(token) {
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const now = Math.floor(Date.now() / 1000);
+    return payload.exp < now;
+  } catch {
+    return true; // 토큰 파싱 실패 시 만료된 걸로 간주
+  }
+}
+
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -17,7 +27,14 @@ export default function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+
+    if (token && isTokenExpired(token)) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(!!token);
+    }
   }, [location.pathname]);
 
   const handleLogin = () => {
@@ -28,7 +45,7 @@ export default function App() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    navigate("/");
+    window.location.href = "/";
   };
 
   return (

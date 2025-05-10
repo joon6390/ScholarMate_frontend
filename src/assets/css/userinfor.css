@@ -288,3 +288,15 @@
     padding: 0 12px; /* 모바일에서 더 좁은 좌우 여백 */
   }
 }
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.scholarship-box {
+  min-height: 850px;
+}

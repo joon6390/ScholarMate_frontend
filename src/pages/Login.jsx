@@ -1,12 +1,15 @@
 import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import axios from "../api/axios";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../assets/css/Auth.css";
 
 export default function Login({ onLogin }) {
   const [form, setForm] = useState({ username: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const fromProtected = location.state?.fromProtected;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -28,8 +31,8 @@ export default function Login({ onLogin }) {
       // 로그인 상태 업데이트 (부모 컴포넌트에 알림)
       onLogin();
 
-      // ✅ 로그인 후 강제 새로고침 → 토큰이 즉시 반영되도록
-      window.location.href = "/"; // 또는 원하는 리디렉션 주소
+      // 로그인 후 새로고침 → 토큰 즉시 반영
+      window.location.href = "/";
     } catch (error) {
       setErrorMessage("아이디 또는 비밀번호가 올바르지 않습니다.");
     }
@@ -39,6 +42,9 @@ export default function Login({ onLogin }) {
     <div className="auth-container">
       <div className="auth-card">
         <h2>로그인</h2>
+        {fromProtected && (
+          <p className="error-message">로그인 후 이용 가능합니다.</p>
+        )}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <form onSubmit={handleSubmit}>
           <input

@@ -248,6 +248,7 @@ h1 {
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
+   min-height: 550px;
 }
 
 /* 테이블 스크롤 가능한 영역 */
