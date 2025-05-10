@@ -9,6 +9,7 @@ import Useinfor from "./pages/Userinfor";
 import PrivateRoute from "./components/PrivateRoute"; // 
 import logo from "./assets/img/로고.png";  
 import Wishlist from "./components/Wishlist";
+import CalendarPage from "./pages/Calendar";
 
 export function isTokenExpired(token) {
   try {
@@ -113,7 +114,7 @@ export default function App() {
             path="/calendar"
             element={
               <PrivateRoute isLoggedIn={isLoggedIn}>
-                <div>캘린더 페이지입니다.</div>
+                <CalendarPage />
               </PrivateRoute>
             }
           />
