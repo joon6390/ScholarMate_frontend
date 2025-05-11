@@ -16,7 +16,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 100px;
 }
 
 .desc {
@@ -52,6 +51,23 @@
 .desc h3{
   text-shadow: 0 25px 5px rgba(0, 0, 0, 0.4);
 }
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  transform: translateY(-50%);
+  color: white;
+}
+
+.arrow.prev {
+  left: 20px;
+}
+
+.arrow.next {
+  right: 20px;
+}
+
 
 
 
