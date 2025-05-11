@@ -1,5 +1,5 @@
 import axios from "axios";
-import { isTokenExpired } from "./auth";
+import isTokenExpired from "./auth";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://127.0.0.1:8000",

@@ -6,20 +6,11 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Useinfor from "./pages/Userinfor";
-import PrivateRoute from "./components/PrivateRoute"; // 
-import logo from "./assets/img/로고.png";  
+import PrivateRoute from "./components/PrivateRoute";
+import logo from "./assets/img/로고.png";
 import Wishlist from "./components/Wishlist";
 import CalendarPage from "./pages/Calendar";
-
-export function isTokenExpired(token) {
-  try {
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    const now = Math.floor(Date.now() / 1000);
-    return payload.exp < now;
-  } catch {
-    return true; // 토큰 파싱 실패 시 만료된 걸로 간주
-  }
-}
+import isTokenExpired from "./api/auth"; 
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,13 +31,14 @@ export default function App() {
 
   const handleLogin = () => {
     setIsLoggedIn(true);
-    navigate("/");
+    navigate("/", { replace: true }); // ✅ navigate로 일관성 유지
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken"); // ✅ refreshToken도 삭제
     setIsLoggedIn(false);
-    window.location.href = "/";
+    navigate("/", { replace: true }); // ✅ 새로고침 대신 부드러운 라우팅
   };
 
   return (
@@ -66,21 +58,17 @@ export default function App() {
           <Link to="/Userinfor" className="nav-btn">나의 장학 정보</Link>
         </nav>
         <div className="header-right" style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-          {/* 마이페이지 버튼 (로그인 상태일 때는 보이고, 로그아웃 상태일 때는 invisible 처리) */}
           {isLoggedIn ? (
             <button className="login-btn" onClick={() => navigate("/profile")}>마이페이지</button>
           ) : (
             <button className="login-btn" style={{ visibility: "hidden" }}>마이페이지</button>
           )}
-          
-          {/* 로그인/로그아웃 버튼 */}
           {isLoggedIn ? (
             <button className="logout-btn" onClick={handleLogout}>로그아웃</button>
           ) : (
             <button className="login-btn" onClick={() => navigate("/login")}>로그인</button>
           )}
         </div>
-
       </header>
 
       <main className="content">
