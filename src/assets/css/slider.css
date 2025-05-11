@@ -49,5 +49,10 @@
     margin-bottom: 100px;
 }
 
+.desc h3{
+  text-shadow: 0 25px 5px rgba(0, 0, 0, 0.4);
+}
+
+
 
 
