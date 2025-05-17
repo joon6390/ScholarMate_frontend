@@ -1,3 +1,13 @@
+body.userinfor-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* 너무 긴 폼일 경우 top부터 정렬 */
+  min-height: 100vh;
+  padding-top: 100px; /* 헤더 공간 확보 */
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
 .profile-box {
   background: #ffffff;
   width: 100%;
@@ -5,7 +15,6 @@
   padding: 50px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 700px;
   margin-bottom: 50px;
 }
 

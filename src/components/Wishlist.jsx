@@ -8,6 +8,14 @@ export default function Wishlist() {
   const [selectedScholarship, setSelectedScholarship] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // ⭐ body에 중앙정렬 클래스 추가
+  useEffect(() => {
+    document.body.classList.add("wishlist-page");
+    return () => {
+      document.body.classList.remove("wishlist-page");
+    };
+  }, []);
+
   useEffect(() => {
     const fetchWishlist = async () => {
       try {

@@ -38,6 +38,13 @@ const Userinfor = () => {
   const [multipleChildrenFamily, setMultipleChildrenFamily] = useState(existingData.multiple_children_family || false);
   const [nationalMerit, setNationalMerit] = useState(existingData.national_merit || false);
 
+  useEffect(() => {
+  document.body.classList.add("userinfor-page");
+  return () => {
+    document.body.classList.remove("userinfor-page");
+  };
+}, []);
+
   // 대학 선택 시 학과 목록 업데이트
   useEffect(() => {
     if (selectedUniversity && universitiesWithDepartments[selectedUniversity]) {

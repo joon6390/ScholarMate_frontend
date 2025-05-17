@@ -1,11 +1,17 @@
-/* ✅ profile-container 수정 (오른쪽으로 이동) */
+body.profile-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
 .profile-container {
   width: 500px;
   max-width: 90%;
-  margin: 100px auto 20px auto; /* ✅ 중앙 정렬 */
-  margin-left: 10%; /* ✅ 화면 중앙보다 오른쪽으로 이동 */
   font-family: Arial, sans-serif;
-  margin-top: 550px;
+  margin: 20px auto;
 }
 
 /* 프로필 헤더 */
@@ -71,7 +77,7 @@
 .profile-card p {
   margin-bottom: 12px; /* ✅ 각 정보 간 간격 추가 */
   line-height: 1.6;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 /* 카드 헤더 */
@@ -175,3 +181,4 @@
     top: 5px;
   }
 }
+

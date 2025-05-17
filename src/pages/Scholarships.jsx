@@ -74,9 +74,16 @@ export default function Scholarships() {
   };
 
   useEffect(() => {
-    fetchScholarships();
-    fetchFavorites();
-  }, [page, selectedType, sortOrder]);
+  // 페이지 진입 시 body에 클래스 부여
+  document.body.classList.add("scholarships-page");
+  fetchScholarships();
+  fetchFavorites();
+
+  // 페이지 벗어날 때 클래스 제거
+  return () => {
+    document.body.classList.remove("scholarships-page");
+  };
+}, [page, selectedType, sortOrder]);
 
   const openModal = (scholarship) => {
     setSelectedScholarship(scholarship);
@@ -153,90 +160,93 @@ export default function Scholarships() {
 
   return (
     <div className="scholarships-container">
-      <div className="search-and-filter">
-        <input
-          type="text"
-          placeholder="장학 사업명 검색"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="search-input"
-        />
-        <button onClick={handleSearch} className="search-btn">검색</button>
+      <div className="scholarships-wrapper">
+        <div className="search-and-filter">
+          <input
+            type="text"
+            placeholder="장학 사업명 검색"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
+          <button onClick={handleSearch} className="search-btn">검색</button>
 
-        <select value={selectedType} onChange={handleTypeChange} className="filter-dropdown">
-          <option value="">모든 유형</option>
-          <option value="regional">지역 연고</option>
-          <option value="academic">성적 우수</option>
-          <option value="income_based">소득 구분</option>
-          <option value="special_talent">특기자</option>
-          <option value="other">기타</option>
-        </select>
+          <select value={selectedType} onChange={handleTypeChange} className="filter-dropdown">
+            <option value="">모든 유형</option>
+            <option value="regional">지역 연고</option>
+            <option value="academic">성적 우수</option>
+            <option value="income_based">소득 구분</option>
+            <option value="special_talent">특기자</option>
+            <option value="other">기타</option>
+          </select>
 
-        <select value={sortOrder} onChange={handleSortChange} className="sort-dropdown">
-          <option value="">정렬 없음</option>
-          <option value="end_date">모집 종료일 순</option>
-        </select>
-      </div>
+          <select value={sortOrder} onChange={handleSortChange} className="sort-dropdown">
+            <option value="">정렬 없음</option>
+            <option value="end_date">모집 종료일 순</option>
+          </select>
+        </div>
 
-      {loading ? (
-        <div className="loading">로딩 중...</div>
-      ) : error ? (
-        <div className="error">{error}</div>
-      ) : scholarships.length === 0 ? (
-        <div className="no-results">검색 결과가 없습니다.</div>
-      ) : (
-        <>
-          <table className="scholarships-table">
-            <thead>
-              <tr>
-                <th>장학 재단명</th>
-                <th>장학 사업명</th>
-                <th>기간</th>
-                <th>상세정보</th>
-                <th>홈페이지</th>
-                <th>찜</th>
-              </tr>
-            </thead>
-            <tbody>
-              {scholarships.map((item) => (
-                <tr key={item.id}>
-                  <td>{item["운영기관명"]}</td>
-                  <td>{item["상품명"]}</td>
-                  <td>{item["모집시작일"]} ~ {item["모집종료일"]}</td>
-                  <td>
-                    <button onClick={() => openModal(item)} className="details-btn">
-                      상세정보 보기
-                    </button>
-                  </td>
-                  <td>
-                    <button onClick={() => window.open(item["홈페이지 주소"], "_blank")} className="details-btn">
-                      홈페이지 보기
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleFavoriteToggle(item)}
-                      className={`favorite-btn ${favorites.has(item.id) ? "favorited" : ""}`}
-                    >
-                      {favorites.has(item.id) ? "❤️" : "🤍"}
-                    </button>
-                  </td>
+        {loading ? (
+          <div className="loading">로딩 중...</div>
+        ) : error ? (
+          <div className="error">{error}</div>
+        ) : scholarships.length === 0 ? (
+          <div className="no-results">검색 결과가 없습니다.</div>
+        ) : (
+          <>
+            <table className="scholarships-table">
+              <thead>
+                <tr>
+                  <th>장학 재단명</th>
+                  <th>장학 사업명</th>
+                  <th>기간</th>
+                  <th>상세정보</th>
+                  <th>홈페이지</th>
+                  <th>찜</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {scholarships.map((item) => (
+                  <tr key={item.id}>
+                    <td>{item["운영기관명"]}</td>
+                    <td>{item["상품명"]}</td>
+                    <td>{item["모집시작일"]} ~ {item["모집종료일"]}</td>
+                    <td>
+                      <button onClick={() => openModal(item)} className="details-btn">
+                        상세정보 보기
+                      </button>
+                    </td>
+                    <td>
+                      <button onClick={() => window.open(item["홈페이지 주소"], "_blank")} className="details-btn">
+                        홈페이지 보기
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleFavoriteToggle(item)}
+                        className={`favorite-btn ${favorites.has(item.id) ? "favorited" : ""}`}
+                      >
+                        {favorites.has(item.id) ? "❤️" : "🤍"}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
 
-          <div className="pagination">
-            <button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page === 1}>
-              이전 페이지
-            </button>
-            <span>페이지 {page} / {totalPages}</span>
-            <button onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))} disabled={page === totalPages}>
-              다음 페이지
-            </button>
-          </div>
-        </>
-      )}
+            <div className="pagination">
+              <button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page === 1}>
+                이전 페이지
+              </button>
+              <span>페이지 {page} / {totalPages}</span>
+              <button onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))} disabled={page === totalPages}>
+                다음 페이지
+              </button>
+            </div>
+          </>
+        )}
+      
+      </div>
 
       {isModalOpen && selectedScholarship && (
         <div className="modal-overlay">

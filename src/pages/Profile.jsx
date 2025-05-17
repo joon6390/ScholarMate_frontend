@@ -85,6 +85,13 @@ export default function Profile() {
     }
   };
 
+  useEffect(() => {
+  document.body.classList.add("profile-page");
+  return () => {
+    document.body.classList.remove("profile-page");
+  };
+}, []);
+
   // 페이지 로딩 시 데이터 가져오기
   useEffect(() => {
     fetchUserData();

@@ -1,10 +1,16 @@
+body.scholarships-page,
+body.wishlist-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px; /* ✅ 이게 핵심 */
+}
+
 .scholarships-container {
   max-width: 1200px;
   width: 100%;
-  margin: 0 auto;
   padding: 20px;
   text-align: center;
-  margin-top: 300px;
 }
 
 h1 {
@@ -243,15 +249,13 @@ h1 {
   background-color: #cc0000;
 }
 
-/* 관심 장학금 목록 외부 래퍼 고정 */
 .wishlist-wrapper {
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
-   min-height: 550px;
+  min-height: 550px;
 }
 
-/* 테이블 스크롤 가능한 영역 */
 .wishlist-table-container {
   max-height: 500px;
   overflow-y: auto;
@@ -293,6 +297,10 @@ h1 {
     padding: 8px;
   }
 }
+
+
+
+
 
 
 

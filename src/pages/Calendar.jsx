@@ -21,6 +21,13 @@ export default function CalendarPage() {
     const saved = localStorage.getItem("alertScholarships");
     return saved ? JSON.parse(saved) : [];
   });
+  
+  useEffect(() => {
+  document.body.classList.add("calendar-page");
+  return () => {
+    document.body.classList.remove("calendar-page");
+  };
+}, []);
 
   useEffect(() => {
     axios.get("/scholarships/calendar/")
