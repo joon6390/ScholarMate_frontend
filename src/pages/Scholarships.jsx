@@ -161,6 +161,10 @@ export default function Scholarships() {
   return (
     <div className="scholarships-container">
       <div className="scholarships-wrapper">
+        <h1 className="text-3xl font-bold mb-8 pb-4 border-b border-gray-300 text-gray-900">
+          장학금 목록
+        </h1>
+
         <div className="search-and-filter">
           <input
             type="text"
@@ -169,7 +173,7 @@ export default function Scholarships() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
           />
-          <button onClick={handleSearch} className="search-btn">검색</button>
+          <button onClick={handleSearch} className="search-btn text-white">검색</button>
 
           <select value={selectedType} onChange={handleTypeChange} className="filter-dropdown">
             <option value="">모든 유형</option>
@@ -235,11 +239,19 @@ export default function Scholarships() {
             </table>
 
             <div className="pagination">
-              <button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page === 1}>
+              <button
+                onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                disabled={page === 1}
+                className="bg-white text-black px-4 py-2 rounded disabled:opacity-50"
+              >
                 이전 페이지
               </button>
-              <span>페이지 {page} / {totalPages}</span>
-              <button onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))} disabled={page === totalPages}>
+              <span className="mx-4">페이지 {page} / {totalPages}</span>
+              <button
+                onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+                disabled={page === totalPages}
+                className="bg-white text-black px-4 py-2 rounded disabled:opacity-50"
+              >
                 다음 페이지
               </button>
             </div>

@@ -3,19 +3,21 @@ import Slider from "../components/Slider";
 import Footer from "../components/Footer"; 
 import CommunityNotice from "../components/CommunityNotice";
 import CardSection from "../components/CardSection";
-import ImgText from "../components/ImgText";
-import ImageType from "../components/ImageType";
-import TextType from '../components/TextType';
+import ContactSection from "../components/ContactSection";
+import LatestNewsSection from "../components/LatestNewsSection";
+import FeatureSection from '../components/FeatureSection';
+import WorkSection from "../components/WorkSection";
 
 export default function Home() {
   return (
     <div className="home-container pb-0">
       <Slider />
       <CommunityNotice />
+      <FeatureSection />
       <CardSection />
-      <ImageType /> 
-      <ImgText />
-      <TextType />
+      <WorkSection />
+      <LatestNewsSection />
+      <ContactSection />
       <Footer />
     </div>
   );

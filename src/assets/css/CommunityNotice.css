@@ -39,7 +39,7 @@
 
 .info-header a {
     text-decoration: none;
-    color: #007bff;
+    color: #111;
     font-size: 0.9rem;
 }
 
@@ -73,7 +73,7 @@
 
 .icon {
     margin-right: 8px;
-    color: #007bff;
+    color: #111;
 }
 
 /* ✅ 반응형 - 모바일에서 세로 배치 */

@@ -47,7 +47,9 @@ export default function App() {
         <div className="header-left">
           <Link to="/" style={{ textDecoration: "none", color: "inherit", display: "flex", alignItems: "center" }}>
             <img src={logo} alt="Logo" className="logo" />
-            <h1>ScholarMate</h1>
+             <h1 className="text-center text-2xl font-bold">
+              ScholarMate
+             </h1>
           </Link>
         </div>
         <nav className="nav">

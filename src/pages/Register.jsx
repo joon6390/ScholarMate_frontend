@@ -50,14 +50,18 @@ export default function Register() {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h2>회원가입</h2>
+        <h1 className="text-3xl font-bold mb-8 pb-4 border-b border-gray-300 text-gray-900">
+          회원가입
+        </h1>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <form onSubmit={handleSubmit}>
           <input type="text" name="username" placeholder="아이디" onChange={handleChange} required />
           <input type="password" name="password" placeholder="비밀번호 (8자 이상)" onChange={handleChange} required />
           <input type="password" name="confirmPassword" placeholder="비밀번호 확인" onChange={handleChange} required />
           <input type="email" name="email" placeholder="이메일 주소" onChange={handleChange} required />
-          <button type="submit" className="btn">회원가입</button>
+           <button type="submit" className="btn bg-black text-white px-4 py-2 rounded">
+            회원가입
+          </button>
         </form>
         <p>이미 계정이 있으신가요? <button className="link-btn" onClick={() => navigate("/login")}>로그인</button></p>
       </div>

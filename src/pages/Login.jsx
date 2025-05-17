@@ -49,7 +49,9 @@ export default function Login({ onLogin }) {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h2>로그인</h2>
+        <h1 className="text-3xl font-bold mb-8 pb-4 border-b border-gray-300 text-gray-900">
+          로그인
+        </h1>
         {location.state?.from && (
           <p className="error-message">로그인 후 이용 가능합니다.</p>
         )}
@@ -71,7 +73,10 @@ export default function Login({ onLogin }) {
             onChange={handleChange}
             required
           />
-          <button type="submit" className="btn">로그인</button>
+          <button type="submit" className="btn bg-black text-white px-4 py-2 rounded">
+            로그인
+          </button>
+
         </form>
         <button
           className="link-btn"

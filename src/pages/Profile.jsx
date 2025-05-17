@@ -110,22 +110,29 @@ export default function Profile() {
     <div className="page-wrapper">
       <div className="profile-container">
         <div className="profile-header">
-          <h2>{userData.username}님의 마이페이지</h2>
+          <h2 className="text-center text-2xl font-bold">
+            {userData.username}님의 마이페이지
+          </h2>
         </div>
+
 
         <div className="profile-card">
-          <h3>회원 정보</h3>
-          <p><strong>아이디:</strong> {userData.username}</p>
-          <p><strong>이메일:</strong> {userData.email}</p>
+        <h3 className="text-left text-xl font-semibold mb-4">회원 정보</h3>
+        <p><strong>아이디:</strong> {userData.username}</p>
+        <p><strong>이메일:</strong> {userData.email}</p>
+      </div>
+
+      <div className="profile-card scholarship-box">
+        <div className="card-header">
+          <h3 className="text-center text-xl font-semibold mb-4">장학 정보</h3>
+          <button
+            className="edit-btn"
+            onClick={() => navigate("/userinfor", { state: { scholarshipData } })}
+          >
+            장학 정보 수정
+          </button>
         </div>
 
-        <div className="profile-card scholarship-box">
-          <div className="card-header">
-            <h3>장학 정보</h3>
-            <button className="edit-btn" onClick={() => navigate("/userinfor", { state: { scholarshipData } })}>
-              장학 정보 수정
-            </button>
-          </div>
 
           {scholarshipData ? (
             <>

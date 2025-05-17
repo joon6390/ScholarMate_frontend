@@ -74,7 +74,7 @@ export default function SliderSection() {
                   {slide.title}
                 </h3>
                 <p className="text-lg md:text-xl mb-6">{slide.desc}</p>
-                <button className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition">
+                <button className="bg-black text-white font-bold px-6 py-3 rounded-lg shadow-md hover:bg-gray-800 hover:scale-105 transition duration-300">
                   자세히 알아보기
                 </button>
               </div>

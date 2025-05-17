@@ -138,7 +138,9 @@ export default function CalendarPage() {
   return (
     <div className="calendar-container">
       <div className="calendar-header">
-        <h2>📅 나의 장학 캘린더</h2>
+        <h1 className="text-3xl font-bold mb-8 pb-4 border-b border-gray-300 text-gray-900">
+          📅 나의 장학 캘린더
+        </h1>
         <input
           type="text"
           placeholder="장학금 이름 검색"

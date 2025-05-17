@@ -79,7 +79,9 @@ export default function Wishlist() {
 
   return (
     <div className="wishlist-wrapper">
-      <h2 className="wishlist-title">관심 장학금 목록</h2>
+      <h1 className="text-3xl font-bold mb-8 pb-4 border-b border-gray-300 text-gray-900">
+          관심 장학금 목록
+      </h1>
 
       {loading ? (
         <div className="loading">로딩 중...</div>

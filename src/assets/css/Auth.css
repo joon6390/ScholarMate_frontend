@@ -51,13 +51,17 @@
     width: 100%; /* 버튼이 카드 너비에 맞게 확장 */
     height: 50px; /* 입력 필드와 높이를 동일하게 설정 */
     padding: 12px;
-    color: white;
+    color: #111;
     border: none;
     border-radius: 8px;
     font-size: 1.3rem;
     cursor: pointer;
     transition: 0.3s;
     margin-top: 20px; /* 버튼과 입력 필드 사이 간격 */
+}
+
+.btn-black {
+  color: #000;
 }
 
 .btn:hover {

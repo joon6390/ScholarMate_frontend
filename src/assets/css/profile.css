@@ -14,39 +14,30 @@ body.profile-page {
   margin: 20px auto;
 }
 
-/* 프로필 헤더 */
+/* ===== 공통 텍스트 정렬 ===== */
+.text-center {
+  text-align: center;
+}
+
+/* ===== 프로필 헤더 ===== */
 .profile-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 30px; /* ✅ 헤더와 내용 간 간격 추가 */
+  justify-content: center; /* 중앙 정렬로 수정 */
+  margin-bottom: 30px;
   border-bottom: 1px solid #ddd;
   padding-bottom: 20px;
 }
 
-.profile-header div {
-  margin-right: 20px;
-}
-
-.profile-header div h2 {
+.profile-header h2 {
   font-size: 1.5rem;
   margin: 0;
 }
 
-.profile-header div p {
-  font-size: 1rem;
-  color: #666;
-}
-
-.profile-actions {
-  display: flex;
-  gap: 10px;
-  margin-left: auto;
-}
-
-/* 버튼 스타일 */
-.btn {
-  padding: 12px 18px; /* ✅ 버튼 크기 증가 */
+/* ===== 버튼 공통 ===== */
+.btn,
+.edit-btn {
+  padding: 12px 18px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -54,33 +45,39 @@ body.profile-page {
   transition: background-color 0.3s ease;
 }
 
-.btn-secondary {
+.btn-secondary,
+.edit-btn {
   background-color: #3498db;
   color: #fff;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+.edit-btn:hover {
   background-color: #0056b3;
 }
 
-/* 프로필 카드 */
+/* ===== 프로필 카드 ===== */
 .profile-card {
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 25px; /* ✅ 패딩 증가 */
+  padding: 25px;
   background-color: #f9f9f9;
-  margin-top: 30px; /* ✅ 카드 간격 증가 */
+  margin-top: 30px;
   position: relative;
 }
 
-/* 카드 내부 간격 */
-.profile-card p {
-  margin-bottom: 12px; /* ✅ 각 정보 간 간격 추가 */
-  line-height: 1.6;
-  margin-top: 25px;
+.profile-card h3 {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
 }
 
-/* 카드 헤더 */
+.profile-card p {
+  margin: 20px 0;
+  line-height: 1.6;
+}
+
+/* ===== 카드 헤더 (장학정보) ===== */
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -88,45 +85,27 @@ body.profile-page {
   position: relative;
 }
 
-.card-header h3 {
-  margin: 0;
-  font-size: 1.3rem;
-}
-
-/* 버튼 위치 조정 */
+/* ===== 수정 버튼 위치 ===== */
 .edit-btn {
-  background-color: #3498db;
-  color: white;
-  padding: 10px 14px; /* ✅ 버튼 크기 증가 */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  white-space: nowrap;
   position: absolute;
   right: 15px;
   top: 10px;
+  white-space: nowrap;
 }
 
-.edit-btn:hover {
-  background-color: #0056b3;
-}
-
-/* 반응형 디자인 */
-
-/* 태블릿 크기 (768px 이하) */
+/* ===== 반응형 ===== */
 @media (max-width: 768px) {
   .profile-container {
     width: 90%;
-    left: 10%; /* 태블릿에서는 중앙 정렬 */
     top: 80px;
   }
 
-  .profile-header div h2 {
+  .profile-header h2 {
     font-size: 1.2rem;
   }
 
-  .btn {
+  .btn,
+  .edit-btn {
     padding: 10px 14px;
     font-size: 12px;
   }
@@ -136,17 +115,13 @@ body.profile-page {
   }
 
   .edit-btn {
-    font-size: 12px;
-    padding: 8px 10px;
     right: 10px;
   }
 }
 
-/* 모바일 크기 (480px 이하) */
 @media (max-width: 480px) {
   .profile-container {
     width: 100%;
-    left: 0;
     padding: 10px;
     top: 60px;
   }
@@ -156,12 +131,7 @@ body.profile-page {
     align-items: flex-start;
   }
 
-  .profile-header div {
-    margin-right: 0;
-    margin-bottom: 15px; /* ✅ 모바일에서 간격 추가 */
-  }
-
-  .profile-header div h2 {
+  .profile-header h2 {
     font-size: 1.1rem;
   }
 
@@ -181,4 +151,3 @@ body.profile-page {
     top: 5px;
   }
 }
-
